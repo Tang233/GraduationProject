@@ -2,7 +2,6 @@ const express = require('express')//引入express模块
 const path=require("path");
 const app = express()//把对象赋给app
 
-const files=express.static(path.join("D:\GraduationProject\GraduationProject\FontEnd\project\src\views\login","login"))
 // app.get('/', (req, res) => res.send('Root'))
 
 app.get('/', function (req, res) {
@@ -11,6 +10,14 @@ app.get('/', function (req, res) {
 })
 
 app.use('/login', function (req,res) {
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+	res.header('Access-Control-Allow-Credentials', true);
+	res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+	res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+	res.header( "Access-Control-Max-Age", "1000" ); //
+	res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+
   res.send("login")
 })
 
