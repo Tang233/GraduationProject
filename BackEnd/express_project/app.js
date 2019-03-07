@@ -4,38 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var mysql = require('mysql');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-//数据库
-
-var connection = mysql.createConnection({      //创建mysql实例
-    host:'127.0.0.1',
-    port:'3306',
-    user:'root',
-    password:'root',
-    database:'expressdb'
-});
-connection.connect();
-var sql = 'SELECT * FROM websites';
-connection.query(sql, function (err,result) {
-    if(err){
-        console.log('[SELECT ERROR]:',err.message);
-    }
-    console.log(result);  //数据库查询结果返回到result中
-
-});
-app.get('/',function (req,res) {
-    res.send('Hello,myServer');  ////服务器响应请求
-});
-connection.end();
-app.listen(3000,function () {    ////监听3000端口
-    console.log('Server running at 3000 port');
-});
 
 
 // view engine setup
