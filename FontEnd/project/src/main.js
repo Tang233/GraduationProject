@@ -5,6 +5,13 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 
+import axios from 'axios'
+
+//axios.defaults.baseURL="http://localhost:3000";
+Vue.prototype.$http=axios;
+Vue.prototype.$http.defaults.withCredentials = true;  //跨域保存session有用
+
+
 Vue.use(VueResource)
 Vue.config.productionTip = false
 

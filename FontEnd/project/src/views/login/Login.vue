@@ -1,56 +1,37 @@
-<template lang="html">
-  <div>
-    <div class="login" v-show="showLogin">
+<template>
+    <div class="login-box">
         <h3>登录</h3>
-        <p v-show="showTishi">{{tishi}}</p>
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
-        <div ><button type="button" v-on:click="login">登录</button></div>
-        <span v-on:click="ToRegister">没有账号？马上注册</span>
+        <div ><button type="button">登录</button></div>
+        <div><a href="#">没有账号？马上注册</a></div>
     </div>
-
-    <div class="register" v-show="showRegister">
-      <h3>注册</h3>
-      <p v-show="showTishi">{{tishi}}</p>
-      <div ><input class="input" type="text" placeholder="请输入用户名" v-model="newUsername"></div>
-      <div ><input class="input" type="text" placeholder="请输入密码" v-model="newPassword"></div>
-      <div ><button type="button" v-on:click="register">注册</button></div>
-      <span v-on:click="ToLogin">已有账号？马上登录</span>
-    </div>
-  </div>
 </template>
 
 <script>
-
-export default {
-  data(){
-          return{
-              showLogin: true,
-              showRegister: false,
-              showTishi: false,
-              tishi: '',
-              username: '',
-              password: '',
-              newUsername: '',
-              newPassword: ''
-          }
+    export default {
+      data(){
+        return{
+          username: '',
+          password: '',
+          user: {}
+        }
       },
-      methods:{
-          ToRegister(){
-          this.showRegister = true
-          this.showLogin = false
-          },
-          ToLogin(){
-            this.showRegister = false
-            this.showLogin = true
-          }
-      }
-
-}
+      methods: {
+      getUsinfo: function () {
+        const self = this
+        var id = this.getCookie('user_id')
+        axios.post('http://localhost:3000/login', {user_id: id})
+          .then(function (response) {
+            self.user = response.data
+          })
+    }
+    }
+  }
 </script>
 
 <style lang="css">
-.login{
+.login-box{
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -66,16 +47,7 @@ input{
   padding: 10px;
 }
 
-p{color:red;}
-
-.register{
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-Button{
+button{
   display: block;
   width: 250px;
   height: 40px;
@@ -84,10 +56,5 @@ Button{
   font-size: 16px;
   margin-bottom: 5px;
 }
-span{
-  cursor: pointer;
-}
-span:hover{
-  color:#41b883;
-}
+
 </style>

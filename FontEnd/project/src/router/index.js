@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Admin from '@/views/admin/Admin.vue'
 import Home from '@/views/home/Home.vue'
 import Login from '@/views/login/Login.vue'
+import Register from '@/views/regist/Register.vue'
 
 
 Vue.use(Router)
@@ -31,7 +32,11 @@ export default new Router({
       path: '/views/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/views/regist',
+      name: 'Register',
+      component: Register
     }
-
   ]
 })
