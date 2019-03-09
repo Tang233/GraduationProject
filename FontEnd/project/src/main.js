@@ -8,12 +8,12 @@ import VueResource from 'vue-resource'
 import axios from 'axios'
 
 //axios.defaults.baseURL="http://localhost:3000";
+Vue.config.productionTip = false
 Vue.prototype.$http=axios;
 Vue.prototype.$http.defaults.withCredentials = true;  //跨域保存session有用
 
 
-Vue.use(VueResource)
-Vue.config.productionTip = false
+// Vue.use(VueResource)
 
 /* eslint-disable no-new */
 new Vue({
