@@ -51,8 +51,8 @@ app.post('/login', function (req,res) {
 
   var sqlString='select * from user where user_id = ?;';
 
+  console.log(req.body.user_id);
 	// req.body=JSON.parse(req.body);
-	console.log(req.body.user_id);
 	var user_id=req.body.user_id;
 	var user_pwd=req.body.user_pwd;
 	mysql.query(sqlString,[user_id],function(results){
