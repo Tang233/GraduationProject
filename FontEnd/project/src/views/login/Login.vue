@@ -5,7 +5,7 @@
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
 
         <div ><button type="button" v-on:click="Login">登录</button></div>
-        <div><a href="#">没有账号？马上注册</a></div>
+        <div><a href="/views/regist">没有账号？马上注册</a></div>
         <p>{{cookie}}</p>
 
     </div>

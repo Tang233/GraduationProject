@@ -44,15 +44,17 @@ app.get('/',function (req,res) {
 //   res.end()
 // })
 
+
+//登录
 app.post('/login', function (req,res) {
   console.log("login:");
   // res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
-res.header('Access-Control-Allow-Credentials', true);
-res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
-res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-res.header( "Access-Control-Max-Age", "1000" ); //
-res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header( "Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
 
   var sqlString="select * from user where user_id = ?;";
@@ -80,8 +82,48 @@ res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 	});
 });
 
+//注册
 app.use("/register", function (req,res) {
-  res.send("register")
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header( "Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString="select * from user where user_id = ?;";
+
+  var new_id=req.body.new_id;
+  var new_pwd=req.body.new_pwd;
+  var repeat_pwd=req.body.repeat_pwd;
+  var new_email=req.body.new_email;
+  var new_icon=req.body.new_icon;
+
+  connection.query(sqlString,[new_id],function(err,results){
+    console.log(new_id);
+    console.log(results);
+    if(results.length){
+        console.log("用户已存在，请登录");
+        res.write("用户已存在，请登录");
+    }
+    else{
+      if(new_pwd==repeat_pwd)
+      {
+        res.cookie('user','user_id='+new_id,cookieConfigure);
+  			console.log("注册成功");
+  			res.write("注册成功");
+  			sqlString='insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);'
+  			mysql.query(sqlString,[new_id,new_pwd,new_email,new_icon],function(results){
+  			console.log('插入成功:'+results);
+			   });
+      }
+      else{
+        console.log("两次密码不一致，请重新输入");
+        res.write("两次密码不一致，请重新输入");
+      }
+    }
+    res.send();
+  });
 })
 
 
