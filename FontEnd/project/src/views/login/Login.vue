@@ -3,12 +3,16 @@
         <h3>登录</h3>
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
-        <div ><button type="button">登录</button></div>
+
+        <div ><button type="button" v-on:click="Login">登录</button></div>
         <div><a href="#">没有账号？马上注册</a></div>
+        <p>{{user}}</p>
+
     </div>
 </template>
 
 <script>
+import axios from 'axios'
     export default {
       data(){
         return{
@@ -18,14 +22,15 @@
         }
       },
       methods: {
-      getUsinfo: function () {
+      Login: function () {
         const self = this
-        var id = this.getCookie('user_id')
-        axios.post('http://localhost:3000/login', {user_id: id})
+        axios.post('http://localhost:3000/login', {headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },user_id: this.username, user_pwd:this.password})
           .then(function (response) {
             self.user = response.data
           })
-    }
+        }
     }
   }
 </script>

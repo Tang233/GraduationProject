@@ -5,6 +5,8 @@ var bodyParser=require('body-parser');//对post请求进行解析
 var https = require('https');
 var qs = require('querystring');
 
+app.use(bodyParser.json());
+
 // app.get('/', (req, res) => res.send('Root'))
 var connection = mysql.createConnection({      //创建mysql实例
     host:'127.0.0.1',
@@ -14,39 +16,43 @@ var connection = mysql.createConnection({      //创建mysql实例
     database:'TangProject'
 });
 connection.connect();
-var sql = 'SELECT * FROM user';
-var str = " ";
-connection.query(sql, function (err,result) {
-    if(err){
-        console.log('[SELECT ERROR]:',err.message);
-    }
-    str = JSON.stringify(result);
-    //数据库查询的数据保存在result中，但浏览器并不能直接读取result中的结果，因此需要用JSON进行解析
-    //console.log(result);   //数据库查询结果返回到result中
-    console.log(str);
-});
+// var sql = 'SELECT * FROM user';
+// var str = " ";
+// connection.query(sql, function (err,result) {
+//     if(err){
+//         console.log('[SELECT ERROR]:',err.message);
+//     }
+//     str = JSON.stringify(result);
+//     //数据库查询的数据保存在result中，但浏览器并不能直接读取result中的结果，因此需要用JSON进行解析
+//     //console.log(result);   //数据库查询结果返回到result中
+//     console.log(str);
+// });
 app.get('/',function (req,res) {
+  console.log(123);
+  var str="123"
     res.send(str);  //服务器响应请求
 });
-connection.end();
+// connection.end();
 
-app.get('/', function (req, res) {
-  res.write("Root")
-  res.end()
-})
+// app.get('/', function (req, res) {
+//   res.write("Root")
+//   res.end()
+// })
 
-app.use('/login', function (req,res) {
+app.post('/login', function (req,res) {
+  console.log("login:");
+  // res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
 	res.header('Access-Control-Allow-Credentials', true);
 	res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
 	res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-	res.header( "Access-Control-Max-Age", "1000" );
+	res.header( "Access-Control-Max-Age", "1000" ); //
 	res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
   var sqlString='select * from user where user_id = ?;';
 
 	// req.body=JSON.parse(req.body);
-	console.log(req.body);
+	console.log(req.body.user_id);
 	var user_id=req.body.user_id;
 	var user_pwd=req.body.user_pwd;
 	mysql.query(sqlString,[user_id],function(results){
@@ -65,7 +71,6 @@ app.use('/login', function (req,res) {
 		}
 		res.send();
 	});
-
 });
 
 app.use("/register", function (req,res) {
