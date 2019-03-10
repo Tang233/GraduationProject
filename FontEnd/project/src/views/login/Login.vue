@@ -1,9 +1,11 @@
 <template>
-    <div class="login-box">
+    <div class="login-box":style="note">
+        <div>
+          <img src="/images/b1.jpg" alt="">
+        </div>
         <h3>登录</h3>
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
-
         <div ><button type="button" v-on:click="Login">登录</button></div>
         <div><a href="/views/regist">没有账号？马上注册</a></div>
         <p>{{cookie}}</p>
@@ -20,6 +22,12 @@ import axios from 'axios'
           password: '',
           user: {},
           cookie: '123'
+         //  note: {
+         // backgroundImage: "url(" + require("./images/b1.jpg") + ") ",
+         // backgroundPosition: "center center",
+         // backgroundRepeat: "no-repeat",
+         // backgroundSize: "cover",
+         //  }
         }
       },
       methods: {

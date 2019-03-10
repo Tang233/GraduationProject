@@ -83,7 +83,7 @@ app.post('/login', function (req,res) {
 });
 
 //注册
-app.use("/register", function (req,res) {
+app.post('/register', function (req,res) {
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
@@ -107,22 +107,26 @@ app.use("/register", function (req,res) {
         res.write("用户已存在，请登录");
     }
     else{
-      if(new_pwd==repeat_pwd)
+      if(results.new_pwd==results.repeat_pwd)
       {
-        res.cookie('user','user_id='+new_id,cookieConfigure);
-  			console.log("注册成功");
-  			res.write("注册成功");
-  			sqlString='insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);'
-  			mysql.query(sqlString,[new_id,new_pwd,new_email,new_icon],function(results){
-  			console.log('插入成功:'+results);
-			   });
+        if(results.new_id!=""){
+          if(results.new_pwd!=""){
+            res.cookie('user','user_id='+new_id,cookieConfigure);
+      			console.log("注册成功");
+      			res.write("注册成功");
+      			sqlString='insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);'
+      			connection.query(sqlString,[new_id,new_pwd,new_email,new_icon],function(results){
+      			console.log('插入成功:'+results);
+    			   });
+          }
+        }
       }
       else{
         console.log("两次密码不一致，请重新输入");
         res.write("两次密码不一致，请重新输入");
       }
     }
-    res.send();
+    res.send("123");
   });
 })
 
