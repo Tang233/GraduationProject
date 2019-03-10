@@ -5,8 +5,8 @@
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
 
         <div ><button type="button" v-on:click="Login">登录</button></div>
-        <div><a href="#">没有账号？马上注册</a></div>
-        <p>{{user}}</p>
+        <div><a href="/views/regist">没有账号？马上注册</a></div>
+        <p>{{cookie}}</p>
 
     </div>
 </template>
@@ -18,19 +18,36 @@ import axios from 'axios'
         return{
           username: '',
           password: '',
-          user: {}
+          user: {},
+          cookie: '123'
         }
       },
       methods: {
       Login: function () {
         const self = this
-        axios.post('http://localhost:3000/login', {headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },user_id: this.username, user_pwd:this.password})
+        axios.post('http://localhost:3000/login', {user_id: this.username, user_pwd:this.password})
           .then(function (response) {
             self.user = response.data
+            alert(self.user)
           })
+      },
+      getCookie: function (column) {
+        var str = document.cookie.split(';')
+        var arr
+        for (var i in str) {
+          arr = unescape(str[i])
+          arr = arr.split('=')
+          for (var j in arr) {
+            if (column === arr[j]) {
+              console.log(arr[Number(j) + 1])
+              return arr[Number(j) + 1]
+            }
+          }
         }
+      }
+    },
+    mounted () {
+      this.cookie = this.getCookie('user_id')
     }
   }
 </script>
