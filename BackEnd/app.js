@@ -121,6 +121,10 @@ app.post('/register', function (req,res) {
           }
         }
       }
+      else if(results.new_id=""){
+        console.log("用户名为空，请重新输入");
+        res.write("用户名为空，请重新输入");
+      }
       else{
         console.log("两次密码不一致，请重新输入");
         res.write("两次密码不一致，请重新输入");
