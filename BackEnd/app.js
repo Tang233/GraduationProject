@@ -95,7 +95,7 @@ app.use("/register", function (req,res) {
 
   var new_id=req.body.new_id;
   var new_pwd=req.body.new_pwd;
-  var repeat_pwd=req.body.repeat_pwd;
+  var repeat_pwd=req.body.new_pwd;
   var new_email=req.body.new_email;
   var new_icon=req.body.new_icon;
 
@@ -113,9 +113,7 @@ app.use("/register", function (req,res) {
   			console.log("注册成功");
   			res.write("注册成功");
   			sqlString='insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);'
-  			mysql.query(sqlString,[new_id,new_pwd,new_email,new_icon],function(results){
-  			console.log('插入成功:'+results);
-			   });
+  			connection.query(sqlString,[new_id,new_pwd,new_email,new_icon]);
       }
       else{
         console.log("两次密码不一致，请重新输入");

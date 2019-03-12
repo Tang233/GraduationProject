@@ -30,10 +30,10 @@ export default {
     Register: function () {
       const self = this
       axios.post('http://localhost:3000/register',
-      {user_id: this.newUname,
-       user_pwd:this.newPwd,
-       user_email:this.newEmail,
-       user_icon:this.newIcon
+      {new_id: this.newUname,
+       new_pwd:this.newPwd,
+       new_email:this.newEmail,
+       new_icon:this.newIcon
       })
         .then(function (response) {
           self.user = response.data
