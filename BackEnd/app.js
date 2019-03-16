@@ -18,7 +18,11 @@ var connection = mysql.createConnection({      //创建mysql实例
     port:'3306',
     user:'root',
     password:'0000',
+<<<<<<< HEAD
     database:'projectdb'
+=======
+    database:'TangProject'
+>>>>>>> c39aed0aa8d74b4f24169424669ebf60fd5e71c8
 });
 connection.connect();
 var sql = 'SELECT * FROM user';
@@ -95,7 +99,7 @@ app.post('/register', function (req,res) {
 
   var new_id=req.body.new_id;
   var new_pwd=req.body.new_pwd;
-  var repeat_pwd=req.body.repeat_pwd;
+  var repeat_pwd=req.body.new_pwd;
   var new_email=req.body.new_email;
   var new_icon=req.body.new_icon;
 
@@ -107,8 +111,7 @@ app.post('/register', function (req,res) {
         res.write("用户已存在，请登录");
     }
     else{
-      if(results.new_pwd==results.repeat_pwd)
-      {
+      if(results.new_pwd==results.repeat_pwd){
         if(results.new_id!=""){
           if(results.new_pwd!=""){
             res.cookie('user','user_id='+new_id,cookieConfigure);

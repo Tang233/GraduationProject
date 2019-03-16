@@ -29,7 +29,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/views/login',
+      path: '/login',
       name: 'Login',
       component: Login
     },
