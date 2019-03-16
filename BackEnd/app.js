@@ -18,7 +18,7 @@ var connection = mysql.createConnection({      //创建mysql实例
     port:'3306',
     user:'root',
     password:'0000',
-    database:'expressdb'
+    database:'projectdb'
 });
 connection.connect();
 var sql = 'SELECT * FROM user';

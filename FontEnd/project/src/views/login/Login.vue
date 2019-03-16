@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box":style="note">
+    <div class="login-box">
         <div>
           <img src="/images/b1.jpg" alt="">
         </div>
