@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box">
+    <div class="login-box":style="note">
         <div>
           <img src="/images/b1.jpg" alt="">
         </div>
@@ -21,13 +21,14 @@ import axios from 'axios'
           username: '',
           password: '',
           user: {},
-          cookie: '123'
-         //  note: {
-         // backgroundImage: "url(" + require("./images/b1.jpg") + ") ",
-         // backgroundPosition: "center center",
-         // backgroundRepeat: "no-repeat",
-         // backgroundSize: "cover",
-         //  }
+          cookie: '123',
+          note:{
+            backgroundImage: "url(" + require("../../../images/b1.jpg") + ") ",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "1680px 800px",
+          }
+
         }
       },
       methods: {

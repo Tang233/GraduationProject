@@ -18,11 +18,7 @@ var connection = mysql.createConnection({      //创建mysql实例
     port:'3306',
     user:'root',
     password:'0000',
-<<<<<<< HEAD
     database:'projectdb'
-=======
-    database:'TangProject'
->>>>>>> c39aed0aa8d74b4f24169424669ebf60fd5e71c8
 });
 connection.connect();
 var sql = 'SELECT * FROM user';
@@ -74,6 +70,7 @@ app.post('/login', function (req,res) {
 				res.cookie('user','user_id='+user_id,cookieConfigure);
 				console.log("登陆成功");
 				res.write("登陆成功");
+
 			}else{
 				console.log("密码错误");
 				res.write("密码错误");
@@ -88,6 +85,7 @@ app.post('/login', function (req,res) {
 
 //注册
 app.post('/register', function (req,res) {
+  console.log("register:");
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
