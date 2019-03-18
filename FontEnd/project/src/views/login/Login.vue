@@ -1,9 +1,23 @@
 <template>
     <div class="login-box":style="note">
-        <div>
-          <img src="/images/b1.jpg" alt="">
-        </div>
-        <h3>登录</h3>
+      <div class="navgation">
+        <nav>
+          <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">个人主页</a></li>
+            <li><a href="#">我的领养</a></li>
+            <li><a href="#">我的申请</a>
+              <ul>
+                <li><a href="#">申请领养</a></li>
+                <li><a href="#">申请发表领养帖</a></li>
+              </ul>
+            </li>
+            <li><a href="#">登录</a></li>
+            <li><a href="#">注册</a></li>
+          </ul>
+        </nav>
+      </div>
+        <h3 style="color:white;">登录</h3>
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
         <div ><button type="button" v-on:click="Login">登录</button></div>
@@ -26,7 +40,8 @@ import axios from 'axios'
             backgroundImage: "url(" + require("../../../images/b1.jpg") + ") ",
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "1680px 800px",
+            backgroundSize: "cover",
+
           }
 
         }
@@ -63,11 +78,24 @@ import axios from 'axios'
 
 <style lang="css">
 .login-box{
+  position: fixed;
+  background-size: 100% 100%;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+.navgation{
+  margin: 100px auto;
+  text-align: center;
+
+
+}
+
 input{
   display: block;
   width: 250px;
