@@ -1,13 +1,13 @@
 <template>
     <div>
-      <Navigation :color="bgd"></Navigation>
-        
+      <Nav :color="bgd"></Nav>
+
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import Navigation from '@/views/Nav'
+import Nav from '@/components/Nav'
 export default {
   name:'Homepage',
   data(){
@@ -16,7 +16,7 @@ export default {
     }
   },
   components: {
-    Navigation
+    Nav
   }
 }
 </script>
