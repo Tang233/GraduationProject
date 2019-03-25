@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-
+import test from '@/components/test.vue'
 import Navigation from '@/views/Nav.vue'
 import Admin from '@/views/Admin.vue'
 import Home from '@/views/Home.vue'
@@ -18,6 +18,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/components/test',
+      name: 'test',
+      component: test
     },
     {
       path: '/views/nav',
