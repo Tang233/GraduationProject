@@ -1,22 +1,28 @@
 <template lang="html">
-<div class="box">
+<div class="box":style="{backgroundColor:color}">
   <nav class="nav-box">
     <ul class="fir">
-      <li> <a href="#">导航一</a> </li>
-      <li> <a href="#">导航二</a>
+      <li><router-link :to="{ path: '/views/home'}">首页</router-link></li>
+      <li><a href="#">个人主页</a></li>
+      <li><a href="#">我的领养</a></li>
+      <li><a href="#">我的申请</a>
         <ul class="sec">
-          <li> <a href="#">二级菜单</a> </li>
-          <li> <a href="#">二级菜单</a> </li>
+          <li><a href="#">申请领养</a></li>
+          <li><a href="#">申请发表领养帖</a></li>
         </ul>
       </li>
-      <li> <a href="#">导航三</a> </li>
+      <li><router-link :to="{ path: '/views/login' }">登录</router-link></li>
+      <li><router-link :to="{ path: '/views/regist' }">注册</router-link></li>
     </ul>
   </nav>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  name:'Nav',
+  props:['color']
 }
 </script>
 
@@ -27,7 +33,6 @@ export default {
   top: 0px;
   left: 0px;
   position: fixed;
-  background-color: green;
 }
 /*导航栏样式*/
 .nav-box{
@@ -42,14 +47,16 @@ export default {
 
 /* 一级导航栏的样式 */
 .fir{
-  display: inline-table;
+  padding: 0px;
+  margin: 0px;
+  display: inline;
 }
 
 /* 一级导航栏的菜单的样式 */
 .fir li{
   float: left;
   display: block;
-  padding: 25px 40px;
+  padding: 20px 40px;
   list-style-type: none;
   background-color: lightpink;
   position: relative;
@@ -73,15 +80,23 @@ ul li:hover ul{
   top: 100%;
   left: 0px;
   list-style-type: none;
+  display: none;
+}
+
+/* 当鼠标悬停二级导航栏时 */
+.sec:hover
+{
+  display: block;
 }
 
 /* 二级菜单每一项的样式,调整宽高 */
 .sec li{
   float: none;
   display: block;
-  width: 58%;
-  height: 40%;
+  width: 60%;
+  height: 30%;
   text-align: center;
+  position: relative;
 
 }
 
@@ -93,7 +108,7 @@ ul li:hover ul{
 /* 二级菜单链接样式 */
 .sec li a{
   text-decoration: none;
-  width: 40px;
+  width: 100px;
 }
 
 
