@@ -75,20 +75,19 @@ ul li:hover ul{
   list-style-type: none;
 }
 
-/* 二级菜单每一项的样式 */
+/* 二级菜单每一项的样式,调整宽高 */
 .sec li{
   float: none;
   display: block;
-  top: 0px;
-  left: 0px;
-  width: 60px;
-  height: 30px;
+  width: 58%;
+  height: 40%;
   text-align: center;
+
 }
 
 /* 鼠标悬停在二级菜单的其中一项时颜色变化 */
 .sec li:hover{
-  background-color: yellow;
+  background-color: #e7e7e7;
 }
 
 /* 二级菜单链接样式 */
