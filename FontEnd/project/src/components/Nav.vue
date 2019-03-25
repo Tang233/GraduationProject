@@ -42,7 +42,7 @@ export default {
   left: 0px;
   width: 100%;
   position: fixed;
-  background-color: lightblue;
+  background:rgba(255, 255, 0, 0.3);
 }
 
 /* 一级导航栏的样式 */
