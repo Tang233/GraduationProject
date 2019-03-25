@@ -29,6 +29,7 @@ export default {
   position: fixed;
   background-color: green;
 }
+/*导航栏样式*/
 .nav-box{
   padding: 0px;
   margin: 0px;
@@ -38,38 +39,63 @@ export default {
   position: fixed;
   background-color: lightblue;
 }
+
+/* 一级导航栏的样式 */
 .fir{
   display: inline-table;
 }
-.sec{
-  position: absolute;
-  padding: 0px;
-  top: 100%;
-}
-ul li{
+
+/* 一级导航栏的菜单的样式 */
+.fir li{
   float: left;
   display: block;
   padding: 25px 40px;
   list-style-type: none;
-  background-color: lightgreen;
+  background-color: lightpink;
   position: relative;
+  font-family: "微软雅黑";
+  font-size: 20px;
 }
-ul li ul{
-  list-style-type: none;
 
-  position: absolute;
+/* 一级菜单链接的样式 */
+.fir li a{
+  text-decoration: none;
 }
+/* 鼠标悬停在一级菜单时二级菜单的样式 */
 ul li:hover ul{
   display: block;
 }
-ul li ul li{
+
+/* 二级菜单的样式 */
+.sec{
+  position: absolute;
+  padding: 0px;
+  top: 100%;
+  left: 0px;
+  list-style-type: none;
+}
+
+/* 二级菜单每一项的样式 */
+.sec li{
   float: none;
   display: block;
   top: 0px;
-  padding: 0px;
+  left: 0px;
+  width: 60px;
+  height: 30px;
+  text-align: center;
+}
 
+/* 鼠标悬停在二级菜单的其中一项时颜色变化 */
+.sec li:hover{
+  background-color: yellow;
 }
-ul li ul li:hover{
-  background-color: lightyellow;
+
+/* 二级菜单链接样式 */
+.sec li a{
+  text-decoration: none;
+  width: 40px;
 }
+
+
 </style>
