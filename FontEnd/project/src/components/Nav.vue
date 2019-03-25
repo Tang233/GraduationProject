@@ -42,7 +42,8 @@ export default {
   left: 0px;
   width: 100%;
   position: fixed;
-  background:rgba(255, 255, 0, 0.3);
+
+  background:rgba(255, 0, 0, 0.3);
 }
 
 /* 一级导航栏的样式 */
@@ -58,7 +59,7 @@ export default {
   display: block;
   padding: 20px 40px;
   list-style-type: none;
-  background-color: lightpink;
+  background:rgba(255, 255, 0, 0.3);
   position: relative;
   font-family: "微软雅黑";
   font-size: 20px;
