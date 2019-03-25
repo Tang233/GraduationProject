@@ -42,8 +42,7 @@ export default {
   left: 0px;
   width: 100%;
   position: fixed;
-
-  background:rgba(255, 0, 0, 0.3);
+  background-color: lightblue;
 }
 
 /* 一级导航栏的样式 */
@@ -59,7 +58,7 @@ export default {
   display: block;
   padding: 20px 40px;
   list-style-type: none;
-  background:rgba(255, 255, 0, 0.3);
+  background-color: lightpink;
   position: relative;
   font-family: "微软雅黑";
   font-size: 20px;
@@ -81,10 +80,9 @@ ul li:hover ul{
   top: 100%;
   left: 0px;
   list-style-type: none;
-  display: none;
-}
 
-/* 当鼠标悬停二级导航栏时 */
+}
+/* 当鼠标悬停二级菜单时 */
 .sec:hover
 {
   display: block;
