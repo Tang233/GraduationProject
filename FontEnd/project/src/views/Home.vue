@@ -1,7 +1,6 @@
 <template>
     <div>
       <Nav :color="bgd"></Nav>
-
     </div>
 </template>
 
@@ -22,4 +21,5 @@ export default {
 </script>
 
 <style lang="css">
+
 </style>

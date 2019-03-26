@@ -90,7 +90,7 @@ export default {
 
 }
 .sec-menu>div{
-  height:50px;
+  height:60px;
   padding:0px 30px 0px 30px;
   background-color:#aaaaaa;
   text-align:center;
