@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Nav from '@/components/Nav.vue'
-import Navigation from '@/views/Nav.vue'
 import Admin from '@/views/Admin.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
@@ -23,11 +22,6 @@ export default new Router({
       path: '/components/nav',
       name: 'Nav',
       component: Nav
-    },
-    {
-      path: '/views/nav',
-      name: 'Navigation',
-      component: Navigation
     },
     {
       path: '/views/admin',
