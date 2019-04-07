@@ -136,5 +136,18 @@ app.post('/register', function (req,res) {
 })
 
 
+//申请领养信息
+app.post('/register', function (req,res) {
+  console.log("register:");
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header( "Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = "insert into adoption(ado_id,adio_master,)"
+});
+
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
