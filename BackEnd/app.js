@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var https = require('https');
 var qs = require('querystring');
 var cors = require('cors');
+var sqlStr = require('./sqlString');
 
 
 var cookieConfigure={maxAge:3000,path:'/',httpOnly:false};
@@ -44,10 +45,9 @@ app.get('/',function (req,res) {
 //   res.end()
 // })
 
-
 //登录
-app.post('/login', function (req,res) {
-  console.log("login:");
+app.post('/login', function (req, res) {
+
   // res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
@@ -57,11 +57,11 @@ app.post('/login', function (req,res) {
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
 
-  var sqlString="select * from user where user_id = ?;";
+  var sqlString = sqlStr.FIND_USERID;
 
 	// req.body=JSON.parse(req.body);
-	var user_id=req.body.user_id;
-	var user_pwd=req.body.user_pwd;
+	var user_id = req.body.user_id;
+	var user_pwd = req.body.user_pwd;
 	connection.query(sqlString,[user_id],function(err,results){
     console.log(user_id);
     console.log(results);
@@ -84,8 +84,8 @@ app.post('/login', function (req,res) {
 });
 
 //注册
-app.post('/register', function (req,res) {
-  console.log("register:");
+app.post('/register', function (req, res) {
+
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
@@ -93,7 +93,7 @@ app.post('/register', function (req,res) {
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString="select * from user where user_id = ?;";
+  var sqlString = sqlStr.FIND_USERID;
 
   var new_id=req.body.new_id;
   var new_pwd=req.body.new_pwd;
@@ -115,7 +115,7 @@ app.post('/register', function (req,res) {
             res.cookie('user','user_id='+new_id,cookieConfigure);
       			console.log("注册成功");
       			res.write("注册成功");
-      			sqlString='insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);'
+      			sqlString= sqlStr.INSERT_USER;
       			connection.query(sqlString,[new_id,new_pwd,new_email,new_icon],function(results){
       			console.log('插入成功:'+results);
     			   });
@@ -135,10 +135,9 @@ app.post('/register', function (req,res) {
   });
 })
 
-
 //申请领养信息
-app.post('/register', function (req,res) {
-  console.log("register:");
+app.post('/newadoption', function (req, res) {
+
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
@@ -146,8 +145,41 @@ app.post('/register', function (req,res) {
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = "insert into adoption(ado_id,adio_master,)"
+  var sqlString = sqlStr.GET_ROW +table;
+  connection.query(sqlString,[],function (err, results) {
+    var sqlStr = sqlStr.NEW_ADOPTION;
+
+    var ado_id = 100000+results.length;
+
+    var ado_master = req.body.ado_master;
+    var ado_title = req.body.ado_title;
+    var ado_image = req.body.ado_image;
+    var ado_content = req.body.ado_content;
+    var ado_status = req.body.ado_status;
+    connection.query(sqlStr,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status],function(err, results) {
+      console.log("新建领养信息成功");
+    })
+  })
+
 });
 
+app.post('/getuserinfo', function (req, res) {
+
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header( "Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.FIND_USERID
+  var user_id = req.body.user.id;
+  connection.query(sqlString,[user_id],function (err, results) {
+    var json = results
+    console.log(json)
+    res.write(JSON.stringify(json))
+    res.end()
+  })
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

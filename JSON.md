@@ -29,6 +29,15 @@ JSON:{
 
 Function: New Adoption
 ```
+Method: POST
+Path: /newadoption
+JSON:{
+  ado_master: "",
+  ado_title: "",
+  ado_image: "",
+  ado_content: "",
+  ado_status: ""
+}
 ```
 
 ---
