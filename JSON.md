@@ -40,5 +40,19 @@ JSON:{
 }
 ```
 
+Function: Get adoption
+```
+Method: POST
+Path: /getaudit
+JSON:{}
+return JSON:{
+ado_id: "",
+ado_master: "",
+ado_title: "",
+ado_image: "",
+ado_content: "",
+ado_status: ""
+}
+```
 ---
 ## 从服务器获取:

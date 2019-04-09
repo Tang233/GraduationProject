@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var https = require('https');
 var qs = require('querystring');
 var cors = require('cors');
+
 var sqlStr = require('./sqlString');
 
 
@@ -163,13 +164,14 @@ app.post('/newadoption', function (req, res) {
 
 });
 
+//获取用户信息通过ID
 app.post('/getuserinfo', function (req, res) {
 
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-  res.header( "Access-Control-Max-Age", "1000" ); //
+  res.header("Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
   var sqlString = sqlStr.FIND_USERID
@@ -179,6 +181,26 @@ app.post('/getuserinfo', function (req, res) {
     console.log(json)
     res.write(JSON.stringify(json))
     res.end()
+  })
+})
+
+//获取所有未审核的领养信息
+app.use('/getaudit', function (req, res) {
+
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.GET_AUDIT;
+
+  connection.query(sqlString, [], function (err, results) {
+    var json = results;
+    console.log(json)
+    res.write(JSON.stringify(json));
+    res.end();
   })
 })
 
