@@ -165,7 +165,7 @@ app.post('/newadoption', function (req, res) {
 });
 
 //获取用户信息通过ID
-app.post('/getuserinfo', function (req, res) {
+app.use('/getuserinfo', function (req, res) {
 
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
@@ -175,7 +175,7 @@ app.post('/getuserinfo', function (req, res) {
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
   var sqlString = sqlStr.FIND_USERID
-  var user_id = req.body.user.id;
+  var user_id = req.body.user_id;
   connection.query(sqlString,[user_id],function (err, results) {
     var json = results
     console.log(json)
@@ -185,7 +185,7 @@ app.post('/getuserinfo', function (req, res) {
 })
 
 //获取所有未审核的领养信息
-app.use('/getaudit', function (req, res) {
+app.use('/getunreviewed', function (req, res) {
 
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
@@ -194,7 +194,7 @@ app.use('/getaudit', function (req, res) {
   res.header("Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = sqlStr.GET_AUDIT;
+  var sqlString = sqlStr.GET_UNREVIEWED;
 
   connection.query(sqlString, [], function (err, results) {
     var json = results;
@@ -203,5 +203,24 @@ app.use('/getaudit', function (req, res) {
     res.end();
   })
 })
+
+app.use('/getadoption', function (req, res) {
+
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.GET_ADOPTION;
+
+  connection.query(sqlString, [], function (err, results) {
+    var json = results;
+    console.log(json)
+    res.write(JSON.stringify(json));
+    res.end();
+  })
+});
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
