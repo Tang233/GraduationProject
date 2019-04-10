@@ -12,12 +12,12 @@
 
 ```
 CREATE TABLE user(
-   use_id varchar(32) not null,
+   user_id varchar(32) not null,
    user_pwd varchar(32) not null,
    user_email varchar(64) null,
    user_icon varchar(64) null,
-   user_moblie vachar(16) null,
-   CONSTRAINT PRIMARY KEY(user_id)
+   user_moblie varchar(16) null,
+   CONSTRAINT PRIMARY KEY (user_id)
   );
 ```
 ---
@@ -70,6 +70,7 @@ CREATE TABLE adoption (
 |:-:|:-:|:-:|:-:|:-:|
 |app_id|varchar|not null|申请ID|主键|
 |app_user|varchar|not null|申请人|外键(user_id)|
+|app_adoption|varchar|not null|申请领养ID|外键(ado_id)|
 |app_content|text|not null|申请内容||
 |app_status|varchar|not null|申请状态|||
 
@@ -77,10 +78,12 @@ CREATE TABLE adoption (
 CREATE TABLE application(
   app_id varchar(32) not null,
   app_user varchar(32) not null,
+  app_adoption varchar(32) not null,
   app_status varchar(16) not null default '未通过',
   app_content text not null,
   CONSTRAINT PRIMARY KEY(app_id),
   CONSTRAINT FOREIGN KEY(app_user) REFERENCES user(user_id),
+  CONSTRAINT FOREIGN KEY(app_adoption) REFERENCES adoption(ado_id),
   CONSTRAINT CHECK(app_status in ('未通过','已通过'))
   );
 ```
