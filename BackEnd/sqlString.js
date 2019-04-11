@@ -1,7 +1,7 @@
 var sqlString = {
   GET_ADOPTION: "select * from adoption where ado_status = '已审核'",
   GET_UNREVIEWED: "select * from adoption where ado_status = '未审核'",
-  GET_ADOPTION_BY_ID: "select * from adoption where ado_id = ?"
+  GET_ADOPTION_BY_ID: "select * from adoption where ado_id = ?",
   GET_ROW: "select count(*) as count from ",
   FIND_USERID: "select * from user where user_id = ?;",
   INSERT_USER: "insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);",
