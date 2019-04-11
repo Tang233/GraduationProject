@@ -6,7 +6,7 @@ import Admin from '@/views/Admin.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
-
+import UserPage from '@/views/UserPage.vue'
 
 Vue.use(Router)
 
@@ -42,6 +42,11 @@ export default new Router({
       path: '/views/regist',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/views/UserPage',
+      name: 'UserPage',
+      component: UserPage
     }
   ]
 })
