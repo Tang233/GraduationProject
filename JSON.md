@@ -62,7 +62,7 @@ JSON: {
 
 Function: Get unreviewed adoption
 ```
-Method: POST
+Method: GET
 Path: /getunreviewed
 JSON:{}
 return JSON:{
@@ -77,7 +77,7 @@ return JSON:{
 
 Function: Get unreviewed adoption
 ```
-Method: POST
+Method: GET
 Path: /getadoption
 JSON:{}
 return JSON:{
