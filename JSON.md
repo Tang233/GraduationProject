@@ -4,7 +4,7 @@
 ## Web Hostname: https://localhost:8080/
 ## Database name: projectdb
 
-## 向服务器发送:
+## Send to Server:
 
 Function: Login
 ```
@@ -58,34 +58,36 @@ JSON: {
 ```
 ---
 
-## 从服务器获取:
+## Get From Server:
 
 Function: Get unreviewed adoption
 ```
-Method: POST
+Method: GET
 Path: /getunreviewed
 JSON:{}
-return JSON:{
+return JSON:[{
   ado_id: "",
   ado_master: "",
   ado_title: "",
   ado_image: "",
   ado_content: "",
   ado_status: ""
-}
+}]
 ```
 
-Function: Get unreviewed adoption
+Function: Get reviewed adoption
 ```
-Method: POST
+Method: GET
 Path: /getadoption
 JSON:{}
-return JSON:{
+return JSON:[{
   ado_id: "",
   ado_master: "",
   ado_title: "",
   ado_image: "",
   ado_content: "",
   ado_status: ""
-}
+}]
 ```
+
+Function:

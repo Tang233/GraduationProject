@@ -136,7 +136,7 @@ app.post('/register', function (req, res) {
   });
 })
 
-//申请领养信息
+//添加领养信息
 app.post('/newadoption', function (req, res) {
 
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
@@ -150,7 +150,7 @@ app.post('/newadoption', function (req, res) {
   connection.query(sqlString,[],function (err, results) {
     var sqlStr = sqlStr.NEW_ADOPTION;
 
-    var ado_id = 100000+results.length;
+    var ado_id = 100000+results[0].count;
 
     var ado_master = req.body.ado_master;
     var ado_title = req.body.ado_title;
@@ -177,8 +177,11 @@ app.use('/getuserinfo', function (req, res) {
   var sqlString = sqlStr.FIND_USERID
   var user_id = req.body.user_id;
   connection.query(sqlString,[user_id],function (err, results) {
-    var json = results
-    console.log(json)
+    var json = results[0]
+    for(var i in results){
+      console.log(json)
+      console.log(results[i])
+    }
     res.write(JSON.stringify(json))
     res.end()
   })
@@ -204,6 +207,7 @@ app.use('/getunreviewed', function (req, res) {
   })
 })
 
+//获取所有已审核的领养信息
 app.use('/getadoption', function (req, res) {
 
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
@@ -217,10 +221,51 @@ app.use('/getadoption', function (req, res) {
 
   connection.query(sqlString, [], function (err, results) {
     var json = results;
-    console.log(json)
+    for(var i in results) {
+      for(var j in results[i]){
+        json[i][j] = results[i][j]
+        console.log(json[i][j])
+      }
+      json.data
+    }
     res.write(JSON.stringify(json));
     res.end();
   })
 });
+
+//申请领养
+app.use('/applyadoption', function (req, res) {
+
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.GET_ADOPTION_BY_ID
+  var app_user = req.body.app_user
+  var app_adoption = req.body.app_adoption
+  var app_content = req.body.app_content
+  var app_status = req.body.app_status
+  connection.query(sqlString,[app_adoption],function (err, results) {
+    var sqlString = sqlStr.GET_ROW+"application"
+    connection.query(sqlString, [], function (err, results) {
+      var sqlString = sqlStr.APPLY_ADOPTION
+      var app_id = 100000+results[0].count
+
+      connection.query(sqlString, [app_id, app_user, app_adoption, app_content, app_stauts], function (err, results) {
+        // for (var i in results) {
+        //   json[i] = results[i]
+        // }
+        var json = results
+        res.write(JSON.stringify(json))
+        res.end()
+      })
+    })
+  })
+})
+
+
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
