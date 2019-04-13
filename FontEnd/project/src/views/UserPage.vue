@@ -1,6 +1,6 @@
 <template>
 <div class="body-style">
-  <Nav :color="bgd"></Nav>
+  <!-- <Nav :color="bgd"></Nav> -->
   <div class="user-box">
     <div class="icon-box">
       <img src="../../images/icon.jpg" alt="">
