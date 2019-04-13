@@ -12,8 +12,8 @@
       <div class="user_mobile">联系方式：{{user_mobile}}</div>
     </div>
   </div>
-
-  <div class="apply-info"></div>
+  <div class="apply-info">
+  </div>
 
 </div>
 </template>
@@ -25,37 +25,30 @@ export default {
   name: 'UserPage',
   data(){
     return{
-      user_id: 'baojian123',
+      userid: 'baojian123',
       user_email: '1825949538@qq.com',
       user_mobile: '15817017250',
-      bgd:'#5f6975'
+      bgd:'#5f6975',
+      adoption_list:[],
     }
   },
-  methods: {
-    getUrl(){
-      var str =location.href.split('/')
-      for(var i in str){
-        if(str[i]==='UserPage'){
-          return str[Number(i)+1]
+  methods:{
+    getReviewed () {
+      const self = this
+      axios.get('http://localhost:3000/getunreviewed',{user_id:this.userid})
+      .then(function (response) {
+        self.adoption_list = response.data
+        for(var i in self.adoption_list) {
+          for(var j in self.adoption_list[i]){
+            console.log(j+": "+self.adoption_list[i][j]);
+          }
+          console.log("\n")
         }
-      }
-    },
-    getUserInfo(){
-      const self=this
-      this.user_id = this.getUrl()
-      axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
-        .then(function (response) {
-          self.user_id=response.data.user_id
-          self.user_email=response.data.user_email
-          self.user_mobile=response.data.user_mobile
-          console.log(self.user_id)
-          console.log(self.user_email)
-          console.log(self.user_mobile)
-        })
+      })
     }
   },
   mounted () {
-    this.getUserInfo()
+    this.getReviewed();
   },
   components: {
     Nav
