@@ -58,7 +58,7 @@ app.post('/login', function (req, res) {
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
 
-  var sqlString = sqlStr.FIND_USERID;
+  var sqlString = sqlStr.FIND_USER_BY_ID;
 
 	// req.body=JSON.parse(req.body);
 	var user_id = req.body.user_id;
@@ -94,45 +94,49 @@ app.post('/register', function (req, res) {
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = sqlStr.FIND_USERID;
+  var sqlString = sqlStr.FIND_USER_BY_ID;
 
   var new_id=req.body.new_id;
   var new_pwd=req.body.new_pwd;
   var repeat_pwd=req.body.new_pwd;
   var new_email=req.body.new_email;
   var new_icon=req.body.new_icon;
+  var new_mobile=req.body.new_mobile;
 
-  connection.query(sqlString,[new_id],function(err,results){
+  connection.query(sqlString,[new_id],function(err, results){
     console.log(new_id);
-    console.log(results);
+    console.log(typeof(results));
     if(results.length){
         console.log("用户已存在，请登录");
         res.write("用户已存在，请登录");
+        res.end();
     }
     else{
-      if(results.new_pwd==results.repeat_pwd){
-        if(results.new_id!=""){
-          if(results.new_pwd!=""){
+      if(new_pwd==repeat_pwd){
+        if(new_id!=""){
+          if(new_pwd!=""){
             res.cookie('user','user_id='+new_id,cookieConfigure);
-      			console.log("注册成功");
-      			res.write("注册成功");
+      			// console.log("注册成功");
+      			// res.write("注册成功");
       			sqlString= sqlStr.INSERT_USER;
-      			connection.query(sqlString,[new_id,new_pwd,new_email,new_icon],function(results){
-      			console.log('插入成功:'+results);
-    			   });
+      			connection.query(sqlString,[new_id,new_pwd,new_email,new_icon,new_mobile],function(results){
+        			console.log('插入成功:'+results);
+              res.send("插入成功");
+    			  });
           }
         }
       }
       else if(results.new_id=""){
         console.log("用户名为空，请重新输入");
         res.write("用户名为空，请重新输入");
+        res.end();
       }
       else{
         console.log("两次密码不一致，请重新输入");
         res.write("两次密码不一致，请重新输入");
+        res.end();
       }
     }
-    res.send("123");
   });
 })
 
@@ -146,19 +150,27 @@ app.post('/newadoption', function (req, res) {
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = sqlStr.GET_ROW +table;
+  var sqlString = sqlStr.GET_ROW +"adoption";
   connection.query(sqlString,[],function (err, results) {
-    var sqlStr = sqlStr.NEW_ADOPTION;
+    var sqlString = sqlStr.NEW_ADOPTION;
 
-    var ado_id = 100000+results[0].count;
+    var ado_id = 100000+results[0].count+1;
 
     var ado_master = req.body.ado_master;
     var ado_title = req.body.ado_title;
     var ado_image = req.body.ado_image;
     var ado_content = req.body.ado_content;
     var ado_status = req.body.ado_status;
-    connection.query(sqlStr,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status],function(err, results) {
+    var arr = [ado_id,ado_master,ado_title,ado_image,ado_content,ado_status]
+    for (var i in arr){
+      console.log(arr[i])
+    }
+    connection.query(sqlString,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status],function(err, results) {
+      if(err) {
+        console.log(err.message)
+      }
       console.log("新建领养信息成功");
+      res.end("新建领养信息成功")
     })
   })
 
@@ -174,7 +186,7 @@ app.use('/getuserinfo', function (req, res) {
   res.header("Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = sqlStr.FIND_USERID
+  var sqlString = sqlStr.FIND_USER_BY_ID
   var user_id = req.body.user_id;
   connection.query(sqlString,[user_id],function (err, results) {
     var json = results[0]

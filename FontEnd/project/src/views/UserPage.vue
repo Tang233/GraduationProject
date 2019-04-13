@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="apply-info">{{user_apply}}</div>
+  <div class="apply-info"></div>
 
 </div>
 </template>
@@ -30,6 +30,32 @@ export default {
       user_mobile: '15817017250',
       bgd:'#5f6975'
     }
+  },
+  methods: {
+    getUrl(){
+      var str =location.href.split('/')
+      for(var i in str){
+        if(str[i]==='UserPage'){
+          return str[Number(i)+1]
+        }
+      }
+    },
+    getUserInfo(){
+      const self=this
+      this.user_id = this.getUrl()
+      axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
+        .then(function (response) {
+          self.user_id=response.data.user_id
+          self.user_email=response.data.user_email
+          self.user_mobile=response.data.user_mobile
+          console.log(self.user_id)
+          console.log(self.user_email)
+          console.log(self.user_mobile)
+        })
+    }
+  },
+  mounted () {
+    this.getUserInfo()
   },
   components: {
     Nav

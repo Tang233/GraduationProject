@@ -46,7 +46,10 @@ export default new Router({
     {
       path: '/views/UserPage',
       name: 'UserPage',
-      component: UserPage
+      component: UserPage,
+      children:[{
+        path:"*"
+      }]
     }
   ]
 })

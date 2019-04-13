@@ -20,25 +20,29 @@ var http=require('http');
 //     return wrap.toString().match(/\/\*\s([\s\S]*)\s\*\//);
 // }
 
-postData = {
-  user_id:"baojian"
-}
 // var options={
-//    hostname:'hotel.tuniu.com',
-//    port:80,
-//    path:'http://trains.ctrip.com/TrainBooking/Ajax/SearchListHandler.ashx?Action=getSearchList',
-//    method:'POST',
-//    headers:{
-//     //'Content-Type':'application/x-www-form-urlencoded',
-//     'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
-//     'Content-Length':Buffer.byteLength(postData)
-//   }
-// }
+  //    hostname:'hotel.tuniu.com',
+  //    port:80,
+  //    path:'http://trains.ctrip.com/TrainBooking/Ajax/SearchListHandler.ashx?Action=getSearchList',
+  //    method:'POST',
+  //    headers:{
+    //     //'Content-Type':'application/x-www-form-urlencoded',
+    //     'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
+    //     'Content-Length':Buffer.byteLength(postData)
+    //   }
+    // }
+postData = {
+  ado_master:"tang",
+  ado_title:"1234",
+  ado_image:"sunny",
+  ado_content:"123",
+  ado_status:"未审核",
+}
 
 var options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/getunreviewed',
+  path: '/newadoption',
   method: 'POST',
   json: true,
   rejectUnauthorized: true,
@@ -62,5 +66,5 @@ var req=http.request(options, function(res) {
 req.on('error',function(err){
     console.error(err);
 });
-// req.write(JSON.stringify(postData));
+req.write(JSON.stringify(postData));
 req.end();
