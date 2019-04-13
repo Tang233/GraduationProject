@@ -12,8 +12,8 @@
       <div class="user_mobile">联系方式：{{user_mobile}}</div>
     </div>
   </div>
-
-  <div class="apply-info">{{user_apply}}</div>
+  <div class="apply-info">
+  </div>
 
 </div>
 </template>
@@ -25,11 +25,30 @@ export default {
   name: 'UserPage',
   data(){
     return{
-      user_id: 'baojian123',
+      userid: 'baojian123',
       user_email: '1825949538@qq.com',
       user_mobile: '15817017250',
-      bgd:'#5f6975'
+      bgd:'#5f6975',
+      adoption_list:[],
     }
+  },
+  methods:{
+    getReviewed () {
+      const self = this
+      axios.get('http://localhost:3000/getunreviewed',{user_id:this.userid})
+      .then(function (response) {
+        self.adoption_list = response.data
+        for(var i in self.adoption_list) {
+          for(var j in self.adoption_list[i]){
+            console.log(j+": "+self.adoption_list[i][j]);
+          }
+          console.log("\n")
+        }
+      })
+    }
+  },
+  mounted () {
+    this.getReviewed();
   },
   components: {
     Nav

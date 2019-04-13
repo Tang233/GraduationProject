@@ -150,19 +150,27 @@ app.post('/newadoption', function (req, res) {
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = sqlStr.GET_ROW +table;
+  var sqlString = sqlStr.GET_ROW +"adoption";
   connection.query(sqlString,[],function (err, results) {
-    var sqlStr = sqlStr.NEW_ADOPTION;
+    var sqlString = sqlStr.NEW_ADOPTION;
 
-    var ado_id = 100000+results[0].count;
+    var ado_id = 100000+results[0].count+1;
 
     var ado_master = req.body.ado_master;
     var ado_title = req.body.ado_title;
     var ado_image = req.body.ado_image;
     var ado_content = req.body.ado_content;
     var ado_status = req.body.ado_status;
-    connection.query(sqlStr,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status],function(err, results) {
+    var arr = [ado_id,ado_master,ado_title,ado_image,ado_content,ado_status]
+    for (var i in arr){
+      console.log(arr[i])
+    }
+    connection.query(sqlString,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status],function(err, results) {
+      if(err) {
+        console.log(err.message)
+      }
       console.log("新建领养信息成功");
+      res.end("新建领养信息成功")
     })
   })
 

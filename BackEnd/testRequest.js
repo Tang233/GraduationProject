@@ -32,11 +32,11 @@ var http=require('http');
     //   }
     // }
 postData = {
-  ado_master:"Jerry",
+  ado_master:"tang",
   ado_title:"1234",
   ado_image:"sunny",
-  ado_content:"",
-  ado_status:"已审核",
+  ado_content:"123",
+  ado_status:"未审核",
 }
 
 var options = {
