@@ -88,13 +88,13 @@ export default {
   width: 150px;
   top: 15%;
   left: 10%;
-
 }
 .icon-box>img{
   position: absolute;
   border-radius: 50%;
   height: 150px;
   width: 150px;
+  border: 7px solid white;
 }
 .userinfo-box{
   display: flex;
@@ -105,13 +105,13 @@ export default {
   width: 500px;
   height: 100px;
   top: 25%;
-  left: 30%;
+  left: 35%;
 }
 
 .apply-info{
   position: absolute;
   width: 60%;
-  height: 100%;
+  height: 90%;
   top: 350px;
   left: 20%;
   border-radius: 10px;

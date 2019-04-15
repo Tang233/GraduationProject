@@ -127,6 +127,6 @@ a{
   border-radius: 10px;
   top: 15px;
   margin: 15px;
-  padding: 5px;
+  padding: 7px;
 }
 </style>
