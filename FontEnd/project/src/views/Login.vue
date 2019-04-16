@@ -1,12 +1,13 @@
 <template>
-    <div class="login-box":style="note">
-        <h3 style="color:white;">登录</h3>
+    <div class="box":style="note">
+      <div class="login-box">
+        <h3>登录</h3>
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
         <div ><button type="button" v-on:click="Login">登录</button></div>
         <div><a href="/views/regist" style="color:white;">没有账号？马上注册</a></div>
         <p>{{cookie}}</p>
-
+      </div>
     </div>
 </template>
 
@@ -60,18 +61,28 @@ import axios from 'axios'
 </script>
 
 <style lang="css">
-.login-box{
-  position: fixed;
-  background-size: 100% 100%;
+.box{
+  position: absolute;
   height: 100%;
   width: 100%;
-  margin: 0px;
-  text-align: center;
+
+}
+.login-box{
+  position: absolute;
+  top: 200px;
+  left: 40%;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content:center;
+  background-color: white;
+  opacity: 0.8;
+  border-radius: 10px;
 }
-
+.login-box>h3{
+  margin-bottom: 10px;
+  text-align: center;
+}
 input{
   display: block;
   width: 250px;
