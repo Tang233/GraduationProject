@@ -5,7 +5,7 @@
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
         <div ><button type="button" v-on:click="Login">登录</button></div>
-        <div><a href="/views/regist" style="color:white;">没有账号？马上注册</a></div>
+        <div class="regist"><a href="/views/regist">没有账号？马上注册</a></div>
         <p>{{cookie}}</p>
       </div>
     </div>
@@ -102,5 +102,11 @@ button{
   font-size: 16px;
   margin-bottom: 5px;
 }
+.regist{
+  text-align: center;
+}
+.regist>a{
 
+  color: black;
+}
 </style>
