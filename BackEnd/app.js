@@ -46,10 +46,7 @@ app.get('/',function (req,res) {
 //   res.end()
 // })
 
-//登录
-app.post('/login', function (req, res) {
-
-  // res.header('Access-Control-Allow-Origin', "*");
+app.post('/login',function ( req , res ) {
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
@@ -57,32 +54,35 @@ app.post('/login', function (req, res) {
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
+  var sqlString=sqlStr.FIND_USER_BY_ID;
+  console.log(sqlString)
+  var user_id=req.body.user_id;
+  var user_pwd=req.body.user_pwd;
 
-  var sqlString = sqlStr.FIND_USER_BY_ID;
+  connection.query(sqlString,[user_id],function(err, results){
+    console.log(results[0].user_id);
+    console.log(results[0].user_pwd);
 
-	// req.body=JSON.parse(req.body);
-	var user_id = req.body.user_id;
-	var user_pwd = req.body.user_pwd;
-	connection.query(sqlString,[user_id],function(err,results){
-    console.log(user_id);
-    console.log(results);
-		if(results.length){
-			if(user_pwd==results[0].user_pwd){
-				res.cookie('user','user_id='+user_id,cookieConfigure);
-				console.log("登陆成功");
-				res.write("登陆成功");
-
-			}else{
-				console.log("密码错误");
-				res.write("密码错误");
-			}
-		}else{
-			console.log("找不到用户名");
-			res.write("找不到用户名");
-		}
-		res.send();
-	});
-});
+    if(results.length){
+      if(user_id==results[0].user_id){
+        if(user_pwd==results[0].user_pwd){
+          res.cookie('user','user_id='+user_id,cookieConfigure);
+          console.log("登录成功！");
+          res.write("登录成功！");
+        }
+        else{
+          console.log("密码错误！");
+          res.write("密码错误！");
+        }
+      }
+    }
+    else{
+      console.log("账号错误！");
+      res.write("账号错误！");
+    }
+    res.send();
+  });
+})
 
 //注册
 app.post('/register', function (req, res) {
