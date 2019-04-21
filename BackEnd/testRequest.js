@@ -32,17 +32,15 @@ var http=require('http');
     //   }
     // }
 postData = {
-  // ado_master: "Jerry",
-  // ado_title: "haha",
-  // ado_image: "123",
-  // ado_content: "kaljsdflk",
-  // ado_date: new Date().toLocaleDateString()
+  user_id:"lalal",
+  user_pwd:"123"
+
 }
 
 var options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/getunreviewed',
+  path: '/login',
   method: 'POST',
   json: true,
   rejectUnauthorized: true,

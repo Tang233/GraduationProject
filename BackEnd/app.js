@@ -60,10 +60,10 @@ app.post('/login',function ( req , res ) {
   var user_pwd=req.body.user_pwd;
 
   connection.query(sqlString,[user_id],function(err, results){
-    console.log(results[0].user_id);
-    console.log(results[0].user_pwd);
 
     if(results.length){
+      console.log(results[0].user_id);
+      console.log(results[0].user_pwd);
       if(user_id==results[0].user_id){
         if(user_pwd==results[0].user_pwd){
           res.cookie('user','user_id='+user_id,cookieConfigure);
