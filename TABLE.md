@@ -48,7 +48,7 @@ CREATE TABLE admin(
 |ado_image|varchar|null|宠物照片||
 |ado_content|text|not null|领养内容||
 |ado_status|varchar|not null|领养状态|||
-
+|ado_date|date|not null|发送日期|||
 
 ```
 CREATE TABLE adoption (
@@ -73,6 +73,7 @@ CREATE TABLE adoption (
 |app_adoption|varchar|not null|申请领养ID|外键(ado_id)|
 |app_content|text|not null|申请内容||
 |app_status|varchar|not null|申请状态|||
+|app_date|date|not null|发送日期|||
 
 ```
 CREATE TABLE application(

@@ -32,17 +32,17 @@ var http=require('http');
     //   }
     // }
 postData = {
-  ado_master:"tang",
-  ado_title:"1234",
-  ado_image:"sunny",
-  ado_content:"123",
-  ado_status:"未审核",
+  // ado_master: "Jerry",
+  // ado_title: "haha",
+  // ado_image: "123",
+  // ado_content: "kaljsdflk",
+  // ado_date: new Date().toLocaleDateString()
 }
 
 var options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/newadoption',
+  path: '/getunreviewed',
   method: 'POST',
   json: true,
   rejectUnauthorized: true,
