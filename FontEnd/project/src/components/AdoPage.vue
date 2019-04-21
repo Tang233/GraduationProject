@@ -3,14 +3,16 @@
   <Nav :color="bgd"></Nav>
   <div class="ado-box">
       <div class="ado-title"><span>{{ado_title}}</span></div>
+      <div class="ado-date"><span>{{ado_date}}</span></div>
       <div class="ado-button">
          <button type="button" name="button">申请领养</button>
       </div>
-      <p>基本情况：</p>
+      <div class="condition"> <p>基本情况：</p></div>
       <div class="ado-content"><span>{{ado_content}}</span></div>
   </div>
   <div class="image-box">
-    <p>宠物相片：</p>
+    <div class="pet-img"><p>宠物相片：</p></div>
+
     <div class="ado-image">
       <img src="../../images/d2.jpg">
       <img src="../../images/d2.jpg">
@@ -39,6 +41,7 @@ export default {
       ado_master: '',
       ado_status: '',
       ado_title: '小黄-广州宠物领养',
+      ado_date: '2019年4月12日',
       ado_img: '',
       ado_content: '类型：小狗   性别：公   年龄：3个月   地址：广州  联系方式：123456789'
     }
@@ -60,9 +63,20 @@ export default {
           self.ado_id=response.data.ado_id
           self.ado_master=response.data.ado_master
           self.ado_status=response.data.ado_status
-          self.ado_title=response.data.ado_img
+          self.ado_title=response.data.ado_title
+          self.ado_img=response.data.ado_img
+          self.ado_content=respone.data.ado_content
+          console.log(self.ado_id)
+          console.log(self.ado_master)
+          console.log(self.ado_status)
+          console.log(self.ado_title)
+          console.log(self.ado_img)
+          console.log(self.ado_content)
         })
     }
+  },
+  mounted() {
+      this.getAdoInfo()
   },
   components: {
     Nav
@@ -99,6 +113,11 @@ p{
   border-radius: 10px;
   background-color: #FFE8CF;
 }
+.ado-box>p{
+  position: absolute;
+  margin: 10px;
+  border: 1px solid;
+}
 .ado-title{
   position: absolute;
   padding: 5px;
@@ -119,6 +138,11 @@ p{
   background-color: #FFE8CF;
   border: 1px solid;
 }
+.ado-date{
+  position: absolute;
+  top: 80px;
+  border: 1px solid;
+}
 .ado-content{
   position: relative;
   left: 16px;
@@ -126,6 +150,7 @@ p{
   height: 100px;
   border: 1px solid;
   border-radius: 10px;
+  margin-top: 20px;
   padding: 7px;
 }
 .image-box{
