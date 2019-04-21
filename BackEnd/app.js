@@ -278,6 +278,46 @@ app.use('/applyadoption', function (req, res) {
   })
 })
 
+//审核通过领养
+app.use('/reviewadoption', function (req, res) {
 
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.REVIEW_ADOPTION
+
+  var ado_id = req.body.ado_id
+
+  connection.query(sqlString, [ado_id], function (err, results) {
+  })
+})
+
+
+//获取领养信息通过ID
+app.use('/getadoptioninfo', function (req, res) {
+
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.FIND_ADOPTION_BY_ID
+
+  var ado_id = req.body.ado_id
+
+  connection.query(sqlString, [ado_id], function (err, results) {
+    if (results.length > 0) {
+      var json = results
+      res.write(JSON.stringify(json))
+      res.end()
+    }
+  })
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
