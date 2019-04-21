@@ -121,7 +121,8 @@ return JSON:[{
   ado_title: "",
   ado_image: "",
   ado_content: "",
-  ado_status: ""
+  ado_status: "",
+  ado_date:""
 }]
 ```
 
@@ -136,7 +137,8 @@ return JSON:[{
   ado_title: "",
   ado_image: "",
   ado_content: "",
-  ado_status: ""
+  ado_status: "",
+  ado_date:""
 }]
 ```
 
