@@ -3,28 +3,30 @@
   <Nav :color="bgd"></Nav>
   <div class="ado-box">
       <div class="ado-title"><span>{{ado_title}}</span></div>
-      <div class="ado-date"><span>{{ado_date}}</span></div>
+      <div class="ado-date">
+        <span>{{ado_date}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>发起人：{{ado_master}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>领养ID：{{ado_id}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>审核状态：{{ado_status}}</span>
+      </div>
       <div class="ado-button">
          <button type="button" name="button">申请领养</button>
       </div>
-      <div class="condition"> <p>基本情况：</p></div>
+
+      <div class="title-one"> <p>基本情况：</p></div>
       <div class="ado-content"><span>{{ado_content}}</span></div>
   </div>
   <div class="image-box">
-    <div class="pet-img"><p>宠物相片：</p></div>
+    <div class="title-two"><p>宠物相片：</p></div>
 
     <div class="ado-image">
-      <img src="../../images/d2.jpg">
-      <img src="../../images/d2.jpg">
-      <img src="../../images/d2.jpg">
-      <img src="../../images/d2.jpg">
-      {{ado_img}}
+      <div><img src="../../images/d2.jpg"></div>
+      <div><img src="../../images/d2.jpg"></div>
+      <div><img src="../../images/d2.jpg"></div>
+      <div><img src="../../images/d2.jpg"></div>
+      <div>{{ado_img}}</div>
     </div>
-    <div class="text">
-      {{ado_master}}
-      {{ado_id}}
-      {{ado_status}}
-    </div>
+
   </div>
 </div>
 </template>
@@ -37,9 +39,9 @@ export default {
   data() {
     return{
       bgd: '#5f6975',
-      ado_id: '',
-      ado_master: '',
-      ado_status: '',
+      ado_id: '000000',
+      ado_master: 'baojian123',
+      ado_status: '已通过',
       ado_title: '小黄-广州宠物领养',
       ado_date: '2019年4月12日',
       ado_img: '',
@@ -88,14 +90,6 @@ export default {
 body{
   background-color: #FDFDC4;
 }
-p{
-  font-family: "微软雅黑";
-  font-size: 1.2rem;
-  position:relative;
-  margin: 25px 15px 10px 15px;
-  width: 100px;
-
-}
 .div-box{
   position: absolute;
   height: 100%;
@@ -109,14 +103,11 @@ p{
   margin: 5px;
   padding: 10px;
   width: 60%;
+  height: 270px;
   box-shadow: 0px 5px 15px #777777;
   border-radius: 10px;
   background-color: #FFE8CF;
-}
-.ado-box>p{
-  position: absolute;
-  margin: 10px;
-  border: 1px solid;
+
 }
 .ado-title{
   position: absolute;
@@ -129,7 +120,7 @@ p{
 .ado-button>button{
   position: relative;
   top: 15px;
-  left: 500px;
+  left: 700px;
   width: 100px;
   height: 54px;
   font-family: "微软雅黑";
@@ -141,40 +132,60 @@ p{
 .ado-date{
   position: absolute;
   top: 80px;
-  border: 1px solid;
+  left: 30px;
+}
+.title-one{
+  position: absolute;
+  left: 30px;
+  top: 115px;
+  font-family: "微软雅黑";
+  font-size: 1.2rem;
+
 }
 .ado-content{
   position: relative;
   left: 16px;
+  top: 55px;
   width: 775px;
   height: 100px;
   border: 1px solid;
   border-radius: 10px;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 7px;
 }
 .image-box{
   position: absolute;
-  top: 400px;
+  top: 440px;
   left: 20%;
   margin: 5px;
   padding: 10px;
   width: 60%;
+  height: 700px;
   box-shadow: 0px 5px 15px #777777;
   border-radius: 10px;
   background-color: #FFE8CF;
 }
+.title-two{
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  font-family: "微软雅黑";
+  font-size: 1.2rem;
+  font-weight: bold;
+
+}
 .ado-image{
-  position: relative;
+  position: absolute;
+  top: 50px;
   left: 16px;
   width: 775px;
   height: 600px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.ado-image>div{
   border: 5px solid white;
 }
-.ado-image>img{
-  float: left;
-}
-.text{
-  border: 1px solid;
-}
+
 </style>
