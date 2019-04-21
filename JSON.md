@@ -54,9 +54,58 @@ JSON: {
   ado_title: "",
   ado_image: "",
   ado_content: "",
-  ado_status: ""
+  ado_date: new Date().toLocaleDateString()
 }
 ```
+
+Function: Apply Adoption
+```
+Method: POST
+Path:/applyadoption
+JSON: {
+  app_user: "",
+  app_adoption: "",
+  app_content: "",
+  app_date: new Date().toLocaleDateString()
+}
+```
+
+Function: Review Adoption
+```
+Method: POST
+Path:/reviewadoption
+JSON: {
+  ado_id:""
+}
+```
+
+Function: Refuse Adoption
+```
+Method: POST
+Path:/refuseadoption
+JSON: {
+  ado_id:""
+}
+```
+
+Function: Get Application
+```
+Method: POST
+Path:/getapplication
+JSON: {
+  app_adoption: ""
+}
+return JSON: [{
+  app_id: "",
+  app_user: "",
+  app_adoption: "",
+  app_content: "",
+  app_status: "",
+  app_date: ""
+  }]
+
+```
+
 ---
 
 ## Get From Server:
