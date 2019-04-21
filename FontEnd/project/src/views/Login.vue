@@ -1,7 +1,7 @@
 <template>
     <div class="box":style="note">
       <div class="login-box">
-        <h3>登录</h3>
+        <h2>登录</h2>
         <div ><input class="input" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="input" type="text" placeholder="请输入密码" v-model="password"></div>
         <div ><button type="button" v-on:click="Login">登录</button></div>
@@ -79,7 +79,7 @@ import axios from 'axios'
   opacity: 0.8;
   border-radius: 10px;
 }
-.login-box>h3{
+.login-box>h2{
   margin-bottom: 10px;
   text-align: center;
 }

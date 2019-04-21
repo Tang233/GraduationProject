@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Nav from '@/components/Nav.vue'
 import AdoPage from '@/components/AdoPage.vue'
-import Admin from '@/views/Admin.vue'
+import AdminLogin from '@/views/AdminLogin.vue'
+import AdminHome from '@/views/AdminHome.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
@@ -30,9 +31,14 @@ export default new Router({
       component: AdoPage
     },
     {
-      path: '/views/admin',
-      name: 'Admin',
-      component: Admin
+      path: '/views/AdminLogin',
+      name: 'AdminLogin',
+      component: AdminLogin
+    },
+    {
+      path: '/views/AdminHome',
+      name: 'AdminHome',
+      component: AdminHome
     },
     {
       path: '/views/home',
