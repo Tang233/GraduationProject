@@ -16,6 +16,12 @@
       <img src="../../images/d2.jpg">
       <img src="../../images/d2.jpg">
       <img src="../../images/d2.jpg">
+      {{ado_img}}
+    </div>
+    <div class="text">
+      {{ado_master}}
+      {{ado_id}}
+      {{ado_status}}
     </div>
   </div>
 </div>
@@ -25,11 +31,37 @@
 import axios from 'axios'
 import Nav from '@/components/Nav'
 export default {
+  name: 'AdoPage',
   data() {
     return{
       bgd: '#5f6975',
+      ado_id: '',
+      ado_master: '',
+      ado_status: '',
       ado_title: '小黄-广州宠物领养',
+      ado_img: '',
       ado_content: '类型：小狗   性别：公   年龄：3个月   地址：广州  联系方式：123456789'
+    }
+  },
+  methods: {
+    getUrl(){
+      var str=location.href.spilt('/')
+      for(var i in str){
+        if(str[i]==='AdoPage'){
+          return str[Number(i)+1]
+        }
+      }
+    },
+    getAdoInfo(){
+        const self=this
+        this.ado_id=this.getUrl()
+        axios.post('http://localhost:3000/getadoption',{ado_id: this.ado_id})
+        .then(function (response) {
+          self.ado_id=response.data.ado_id
+          self.ado_master=response.data.ado_master
+          self.ado_status=response.data.ado_status
+          self.ado_title=response.data.ado_img
+        })
     }
   },
   components: {
@@ -116,5 +148,8 @@ p{
 }
 .ado-image>img{
   float: left;
+}
+.text{
+  border: 1px solid;
 }
 </style>
