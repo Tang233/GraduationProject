@@ -12,6 +12,10 @@
 <script>
 import axios from 'axios'
 export default {
+    data() {
+      return {
+      }
+    },
     mounted() {
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
@@ -21,7 +25,8 @@ export default {
         var base_list = [];
         canvas.width = width;
         canvas.height = height;
-        // 绘制园
+
+        // 绘制圆
         const drawRounds = (obj, index) => {
             let { x, y, r, color } = obj;
             ctx.beginPath();
@@ -167,10 +172,6 @@ export default {
         }
         window.addEventListener("mousemove", moveXY);
         window.addEventListener("click", addXY)
-    },
-    data() {
-        return {
-        }
     },
     props: {
         dotsNum: {
