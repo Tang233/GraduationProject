@@ -5,7 +5,7 @@
           <h2>管理员登录</h2>
           <div class="admin-id"><input type="text" placeholder="请输入账号" v-model="admin_id"></div>
           <div class="admin-pwd"><input type="text" placeholder="请输入密码" v-model="admin_pwd"></div>
-          <div class="login-button"><button type="button" name="button">登录</button></div>
+          <div class="login-button"><button type="button" v-on:="AdminLogin">登录</button></div>
         </div>
       </div>
 </template>
@@ -14,6 +14,33 @@ import axios from 'axios'
 export default {
     data() {
       return {
+        admin_id: '',
+        admin_pwd: '',
+        admin: {}
+      }
+    },
+    methods: {
+      AdminLogin: function () {
+        const self = this
+        axios.post('http://localhost:3000/adminlogin', {admin_id: this.admin_id,admin_pwd: this.admin_pwd})
+          .then(function ( response) {
+            self.admin=response.data
+            alert(self.admin)
+          })
+      },
+      getCookie: function (column) {
+        var str = document.cookie.split(';')
+        var arr
+        for (var i in str) {
+          arr = unescape(str[i])
+          arr = arr.split('=')
+          for (var j in arr) {
+            if (column === arr[j]) {
+              console.log(arr[Number(j) + 1])
+              return arr[Number(j) + 1]
+            }
+          }
+        }
       }
     },
     mounted() {

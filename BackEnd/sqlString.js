@@ -5,6 +5,7 @@ var sqlString = {
   FIND_APPLICATION: "select * from application where app_adoption = ?",
   FIND_ADOPTION_BY_ID: "select * from adoption where ado_id = ?",
   FIND_USER_BY_ID: "select * from user where user_id = ?",
+  FIND_ADMIN_BY_ID: "select * from admin where admin_id = ?",
   INSERT_USER: "insert into user(user_id,user_pwd,user_email,user_icon) values(?,?,?,?);",
   NEW_ADOPTION: "insert into adoption(ado_id,ado_master,ado_title,ado_image,ado_content,ado_status,ado_date) values(?,?,?,?,?,?,?)",
   APPLY_ADOPTION: "insert into application(app_id, app_user, app_adoption, app_content, app_status, app_date) values(?,?,?,?,?,?)",

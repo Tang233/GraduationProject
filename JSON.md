@@ -28,6 +28,15 @@ JSON: {
   new_moblie: ""
 }
 ```
+Function: AdminLogin
+```
+Method: POST
+Path: /adminlogin
+JSON: {
+ admin_id: "",
+ admin_pwd: ""
+}
+```
 
 Function: Get User Info By Id
 ```

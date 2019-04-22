@@ -46,6 +46,7 @@ app.get('/',function (req,res) {
 //   res.end()
 // })
 
+//用户登录
 app.post('/login',function ( req , res ) {
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
@@ -137,6 +138,43 @@ app.post('/register', function (req, res) {
         res.end();
       }
     }
+  });
+})
+
+//管理员登录
+app.post('/adminlogin', function (req, res ) {
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header( "Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString=sqlStr.FIND_ADMIN_BY_ID;
+  console.log(sqlString)
+  var admin_id=req.body.admin_id;
+  var admin_pwd=req.body.admin_pwd;
+
+  connection.query(sqlString,[admin_id],function(err, results){
+    if(results.length){
+      console.log(results[0].admin_id);
+      console.log(results[0].admin_pwd);
+      if(admin_id==results[0].admin_id)
+      {
+        if(admin_pwd==results[0].admin_pwd){
+          res.cookie('admin','admin_id='+admin_id,cookieConfigure);
+          console.log("登录成功！");
+          res.write("登录成功！");
+        }else{
+          console.log("密码错误！");
+          res.write("密码错误！");
+        }
+      }else{
+        console.log("账号错误！");
+        res.write("账号错误！");
+      }
+    }
+    res.send();
   });
 })
 
