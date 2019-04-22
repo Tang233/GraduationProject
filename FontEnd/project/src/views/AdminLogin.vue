@@ -3,8 +3,8 @@
         <canvas id="canvas"></canvas>
         <div class="admin-login">
           <h2>管理员登录</h2>
-          <div><input type="text" placeholder="请输入账号" v-model="admin_id"></div>
-          <div><input type="text" placeholder="请输入密码" v-model="admin_pwd"></div>
+          <div class="admin-id"><input type="text" placeholder="请输入账号" v-model="admin_id"></div>
+          <div class="admin-pwd"><input type="text" placeholder="请输入密码" v-model="admin_pwd"></div>
           <div class="login-button"><button type="button" name="button">登录</button></div>
         </div>
       </div>
@@ -207,32 +207,43 @@ export default {
       height: 300px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 45px;
+      padding: 50px;
       background-color: #C8E7ED;
       border-radius: 50%;
     }
-    .admin-box>div{
-      position: absolute;
-      margin: 15px;
-    }
     h2{
+      position: absolute;
+      padding: 10px;
+      left: 125px;
       font-family: "微软雅黑";
-      padding-bottom: 10px;
       text-align: center;
     }
-    input{
+    .admin-id>input{
+      position: absolute;
       display: block;
-      width: 250px;
-      height: 40px;
+      width: 300px;
+      height: 54px;
+      top: 110px;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .admin-pwd>input{
+      position: absolute;
+      display: block;
+      width: 300px;
+      height: 54px;
+      top: 185px;
       font-size: 1.1rem;
       margin-bottom: 10px;
     }
     button{
       position: absolute;
-      width:255px;
+      width:304px;
       height: 45px;
+      top: 260px;
       font-family: "微软雅黑";
       font-size: 1.2rem;
+      border-radius: 10px;
+      border: 2px solid #8BBBF6;
     }
 </style>
