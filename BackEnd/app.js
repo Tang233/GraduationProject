@@ -65,7 +65,6 @@ app.post('/login',function ( req , res ) {
     if(results.length){
       console.log(results[0].user_id);
       console.log(results[0].user_pwd);
-      if(user_id==results[0].user_id){
         if(user_pwd==results[0].user_pwd){
           res.cookie('user','user_id='+user_id,cookieConfigure);
           console.log("登录成功！");
@@ -75,7 +74,6 @@ app.post('/login',function ( req , res ) {
           console.log("密码错误！");
           res.write("密码错误！");
         }
-      }
     }
     else{
       console.log("账号错误！");
@@ -159,8 +157,6 @@ app.post('/adminlogin', function (req, res ) {
     if(results.length){
       console.log(results[0].admin_id);
       console.log(results[0].admin_pwd);
-      if(admin_id==results[0].admin_id)
-      {
         if(admin_pwd==results[0].admin_pwd){
           res.cookie('admin','admin_id='+admin_id,cookieConfigure);
           console.log("登录成功！");
@@ -169,10 +165,9 @@ app.post('/adminlogin', function (req, res ) {
           console.log("密码错误！");
           res.write("密码错误！");
         }
-      }else{
-        console.log("账号错误！");
-        res.write("账号错误！");
-      }
+    }else{
+      console.log("账号错误！");
+      res.write("账号错误！");
     }
     res.send();
   });

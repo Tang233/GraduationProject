@@ -5,7 +5,7 @@
           <h2>管理员登录</h2>
           <div class="admin-id"><input type="text" placeholder="请输入账号" v-model="admin_id"></div>
           <div class="admin-pwd"><input type="text" placeholder="请输入密码" v-model="admin_pwd"></div>
-          <div class="login-button"><button type="button" v-on:="AdminLogin">登录</button></div>
+          <div class="login-button"><button type="button" v-on:click="AdminLogin">登录</button></div>
         </div>
       </div>
 </template>

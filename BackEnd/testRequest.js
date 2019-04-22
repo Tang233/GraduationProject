@@ -32,15 +32,15 @@ var http=require('http');
     //   }
     // }
 postData = {
-  user_id:"lalal",
-  user_pwd:"123"
+  admin_id:"tangjin",
+  admin_pwd:"123456"
 
 }
 
 var options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/login',
+  path: '/adminlogin',
   method: 'POST',
   json: true,
   rejectUnauthorized: true,
