@@ -9,7 +9,7 @@
       <div class="ado-status">审核状态：{{ado_status}}</div>
       <div class="ado-content">基本情况：{{ado_content}}</div>
       <div class="ado-img">{{ado_img}}</div>
-      <button class="pass" v-on:click="passado">通过</button>
+      <button class="pass" v-on:click="pass">通过</button>
       <button class="nopass" v-on:click="nopass" >不通过</button>
     </div>
   </div>
@@ -34,13 +34,60 @@ export default {
       ado_id: '123456',
       ado_status: '未审核',
       ado_content: '类型：小狗   性别：公   年龄：3个月   地址：广州  联系方式：12345678',
-      ado_img: ''
+      ado_img: '',
+      adoption: {}
     }
   },
 methods: {
-    passado: function() {
+    getUrl: function() {
+      var str=location.href.split('/')
+      for(var i in str){
+        if(str[i]==='Unreviewed'){
+          return str[Number(i)+1]
+        }
+      }
+    },
+    getUnreviewed: function() {
+      const self = this
+      this.ado_id=this.getUrl()
+      if(typeof(this.ado_id) =="undefined"){
 
+      }else{
+        axios.post('http://localhost:3000/getunreviewed',{ado_id: this.ado_id})
+        .then(function (response) {
+          self.ado_title=response.data.ado_title
+          self.ado_id=response.data.ado_id
+          self.ado_date=response.data.ado_date
+          self.ado_master=response.data.ado_master
+          self.ado_content=response.data.ado_content
+          self.ado_img=response.data.ado_img
+          self.ado_status=response.data.ado_status
+        })
+      }
+    },
+    pass: function() {
+      const self = this
+      this.ado_id=this.getUrl()
+      axios.post('http://localhost:3000/reviewadoption',{ado_id: this.ado_id})
+      .then(function (response) {
+        self.adoption = response.data
+        alert(self.adoption)
+        self.$router.push('/views/Adminhome')
+      })
+    },
+    nopass: function() {
+      const self = this
+      this.ado_id=this.getUrl()
+      axios.post('http://localhost:3000/refuseadoption',{ado_id: this.ado_id})
+      .then(function (response) {
+        self.adoption = response.data
+        alert(self.adoption)
+        self.$router.push('/views/Adminhome')
+      })
     }
+  },
+  mounted() {
+    this.getUnreviewed()
   }
 }
 </script>

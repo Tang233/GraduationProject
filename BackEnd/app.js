@@ -371,7 +371,7 @@ app.use('/refuseadoption', function (req, res) {
   var ado_id = req.body.ado_id
 
   connection.query(sqlString, [ado_id], function (err, results) {
-    res.send('审核通过')
+    res.send('审核未通过')
   })
 })
 
