@@ -4,7 +4,7 @@
   <div class="ado-box">
       <div class="ado-title"><span>{{ado_title}}</span></div>
       <div class="ado-date">
-        <span>{{ado_date}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>日期：{{ado_date}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>发起人：{{ado_master}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>领养ID：{{ado_id}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>审核状态：{{ado_status}}</span>
@@ -27,7 +27,12 @@
       <div>{{ado_img}}</div>
     </div>
 
+      <div class="title-two"><p>宠物相片：</p></div>
+      <div class="ado-image">
+        <div>{{ado_img}}</div>
+      </div>
   </div>
+
 </div>
 </template>
 
@@ -60,8 +65,12 @@ export default {
     getAdoInfo(){
       const self = this
       this.ado_id=this.getUrl()
-      axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
+      if(typeof(this.ado_id) =="undefined"){
+
+      }else{
+        axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
         .then(function (response) {
+          self.ado_date=response.data.ado_date
           self.ado_id=response.data.ado_id
           self.ado_master=response.data.ado_master
           self.ado_status=response.data.ado_status
@@ -69,6 +78,7 @@ export default {
           self.ado_img=response.data.ado_img
           self.ado_content=response.data.ado_content
         })
+      }
     }
   },
   mounted() {
@@ -97,7 +107,7 @@ body{
   margin: 5px;
   padding: 10px;
   width: 60%;
-  height: 270px;
+  height: 100%;
   box-shadow: 0px 5px 15px #777777;
   border-radius: 10px;
   background-color: #FFE8CF;
@@ -147,21 +157,10 @@ body{
   margin-top: 30px;
   padding: 7px;
 }
-.image-box{
-  position: absolute;
-  top: 440px;
-  left: 20%;
-  margin: 5px;
-  padding: 10px;
-  width: 60%;
-  height: 700px;
-  box-shadow: 0px 5px 15px #777777;
-  border-radius: 10px;
-  background-color: #FFE8CF;
-}
+
 .title-two{
   position: absolute;
-  top: 10px;
+  top: 280px;
   left: 30px;
   font-family: "微软雅黑";
   font-size: 1.2rem;
@@ -170,8 +169,8 @@ body{
 }
 .ado-image{
   position: absolute;
-  top: 50px;
-  left: 16px;
+  top: 315px;
+  left: 25px;
   width: 775px;
   height: 600px;
   display: flex;

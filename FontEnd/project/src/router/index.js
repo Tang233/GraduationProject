@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Nav from '@/components/Nav.vue'
 import AdoPage from '@/components/AdoPage.vue'
+import Unreviewed from '@/components/Unreviewed.vue'
 import AdminLogin from '@/views/AdminLogin.vue'
 import AdminHome from '@/views/AdminHome.vue'
 import Home from '@/views/Home.vue'
@@ -42,6 +43,14 @@ export default new Router({
       path: '/views/AdminHome',
       name: 'AdminHome',
       component: AdminHome
+    },
+    {
+      path: '/components/Unreviewed',
+      name: 'Unreviewed',
+      component: Unreviewed,
+      children:[{
+        path:"*"
+      }]
     },
     {
       path: '/views/home',
