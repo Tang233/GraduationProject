@@ -57,6 +57,7 @@ CREATE TABLE adoption (
   ado_title varchar(128) not null,
   ado_image varchar(32) null,
   ado_content text not null,
+  ado_date date not null,
   ado_status varchar(32) not null default '未审核',
   CONSTRAINT CHECK(ado_status in ('未审核','已通过','未通过','已领养')),
   CONSTRAINT PRIMARY KEY(ado_id),

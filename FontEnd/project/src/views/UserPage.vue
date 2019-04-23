@@ -43,7 +43,11 @@ export default {
     getUserInfo(){
       const self=this
       this.user_id = this.getUrl()
-      axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
+      if(typeof(this.user_id) == 'undefined'){
+        return ;
+      }
+      else{
+        axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
         .then(function (response) {
           self.user_id=response.data.user_id
           self.user_email=response.data.user_email
@@ -52,6 +56,7 @@ export default {
           console.log(self.user_email)
           console.log(self.user_mobile)
         })
+      }
     }
   },
   mounted () {

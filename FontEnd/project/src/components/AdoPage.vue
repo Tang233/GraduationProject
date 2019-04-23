@@ -14,7 +14,7 @@
       </div>
 
       <div class="title-one"> <p>基本情况：</p></div>
-      <div class="ado-content"><span>{{ado_content}}</span></div>
+      <div class="ado-content" ><span v-html="ado_content"></span><br/></div>
   </div>
   <div class="image-box">
     <div class="title-two"><p>宠物相片：</p></div>
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getUrl(){
-      var str=location.href.spilt('/')
+      var str=location.href.split('/')
       for(var i in str){
         if(str[i]==='AdoPage'){
           return str[Number(i)+1]
@@ -58,22 +58,16 @@ export default {
       }
     },
     getAdoInfo(){
-        const self=this
-        this.ado_id=this.getUrl()
-        axios.post('http://localhost:3000/getadoption',{ado_id: this.ado_id})
+      const self = this
+      this.ado_id=this.getUrl()
+      axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
         .then(function (response) {
           self.ado_id=response.data.ado_id
           self.ado_master=response.data.ado_master
           self.ado_status=response.data.ado_status
           self.ado_title=response.data.ado_title
           self.ado_img=response.data.ado_img
-          self.ado_content=respone.data.ado_content
-          console.log(self.ado_id)
-          console.log(self.ado_master)
-          console.log(self.ado_status)
-          console.log(self.ado_title)
-          console.log(self.ado_img)
-          console.log(self.ado_content)
+          self.ado_content=response.data.ado_content
         })
     }
   },
@@ -187,5 +181,4 @@ body{
 .ado-image>div{
   border: 5px solid white;
 }
-
 </style>

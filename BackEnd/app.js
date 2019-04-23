@@ -222,6 +222,9 @@ app.use('/getuserinfo', function (req, res) {
 
   var sqlString = sqlStr.FIND_USER_BY_ID
   var user_id = req.body.user_id;
+  if(user_id ==''){
+    res.send("不能为空")
+  }
   connection.query(sqlString,[user_id],function (err, results) {
     var json = results[0]
     for(var i in results){
@@ -372,27 +375,27 @@ app.use('/refuseadoption', function (req, res) {
   })
 })
 
-// //获取领养信息通过ID
-// app.use('/getadoptioninfo', function (req, res) {
-//
-//   res.header('Access-Control-Allow-Origin', req.header('Origin'));
-//   res.header('Access-Control-Allow-Credentials', true);
-//   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-//   res.header("Access-Control-Max-Age", "1000" ); //
-//   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-//
-//   var sqlString = sqlStr.FIND_ADOPTION_BY_ID
-//
-//   var ado_id = req.body.ado_id
-//
-//   connection.query(sqlString, [ado_id], function (err, results) {
-//     if (results.length > 0) {
-//       var json = results
-//       res.write(JSON.stringify(json))
-//       res.end()
-//     }
-//   })
-// })
+//获取领养信息通过ID
+app.use('/getadoptioninfo', function (req, res) {
+
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.FIND_ADOPTION_BY_ID
+
+  var ado_id = req.body.ado_id
+
+  connection.query(sqlString, [ado_id], function (err, results) {
+    if (results.length > 0) {
+      var json = results[0]
+      res.write(JSON.stringify(json))
+      res.end()
+    }
+  })
+})
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))

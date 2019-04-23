@@ -31,6 +31,9 @@ import axios from 'axios'
           .then(function (response) {
             self.user = response.data
             alert(self.user)
+            // if(self.user =="登陆成功"){
+              self.$router.push('/views/home')
+            // }
           })
       },
       getCookie: function (column) {
@@ -227,7 +230,7 @@ import axios from 'axios'
   }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 #canvas{
     position: fixed;
     z-index: -1;
