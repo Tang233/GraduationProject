@@ -4,7 +4,7 @@
   <div class="ado-box">
       <div class="ado-title"><span>{{ado_title}}</span></div>
       <div class="ado-date">
-        <span>{{ado_date}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>日期：{{ado_date}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>发起人：{{ado_master}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>领养ID：{{ado_id}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>审核状态：{{ado_status}}</span>
@@ -15,19 +15,13 @@
 
       <div class="title-one"> <p>基本情况：</p></div>
       <div class="ado-content"><span>{{ado_content}}</span></div>
-  </div>
-  <div class="image-box">
-    <div class="title-two"><p>宠物相片：</p></div>
 
-    <div class="ado-image">
-      <div><img src="../../images/d2.jpg"></div>
-      <div><img src="../../images/d2.jpg"></div>
-      <div><img src="../../images/d2.jpg"></div>
-      <div><img src="../../images/d2.jpg"></div>
-      <div>{{ado_img}}</div>
-    </div>
-
+      <div class="title-two"><p>宠物相片：</p></div>
+      <div class="ado-image">
+        <div>{{ado_img}}</div>
+      </div>
   </div>
+
 </div>
 </template>
 
@@ -50,7 +44,7 @@ export default {
   },
   methods: {
     getUrl(){
-      var str=location.href.spilt('/')
+      var str=location.href.split('/')
       for(var i in str){
         if(str[i]==='AdoPage'){
           return str[Number(i)+1]
@@ -60,14 +54,16 @@ export default {
     getAdoInfo(){
         const self=this
         this.ado_id=this.getUrl()
-        axios.post('http://localhost:3000/getadoption',{ado_id: this.ado_id})
+        axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
         .then(function (response) {
+          self.ado_date=response.data.ado_date
           self.ado_id=response.data.ado_id
           self.ado_master=response.data.ado_master
           self.ado_status=response.data.ado_status
           self.ado_title=response.data.ado_title
           self.ado_img=response.data.ado_img
-          self.ado_content=respone.data.ado_content
+          self.ado_content=response.data.ado_content
+          console.log(self.ado_date)
           console.log(self.ado_id)
           console.log(self.ado_master)
           console.log(self.ado_status)
@@ -103,7 +99,7 @@ body{
   margin: 5px;
   padding: 10px;
   width: 60%;
-  height: 270px;
+  height: 100%;
   box-shadow: 0px 5px 15px #777777;
   border-radius: 10px;
   background-color: #FFE8CF;
@@ -153,21 +149,10 @@ body{
   margin-top: 30px;
   padding: 7px;
 }
-.image-box{
-  position: absolute;
-  top: 440px;
-  left: 20%;
-  margin: 5px;
-  padding: 10px;
-  width: 60%;
-  height: 700px;
-  box-shadow: 0px 5px 15px #777777;
-  border-radius: 10px;
-  background-color: #FFE8CF;
-}
+
 .title-two{
   position: absolute;
-  top: 10px;
+  top: 280px;
   left: 30px;
   font-family: "微软雅黑";
   font-size: 1.2rem;
@@ -176,8 +161,8 @@ body{
 }
 .ado-image{
   position: absolute;
-  top: 50px;
-  left: 16px;
+  top: 315px;
+  left: 25px;
   width: 775px;
   height: 600px;
   display: flex;

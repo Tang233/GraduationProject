@@ -28,7 +28,10 @@ export default new Router({
     {
       path: '/components/AdoPage',
       name: 'AdoPage',
-      component: AdoPage
+      component: AdoPage,
+      children:[{
+        path:"*"
+      }]
     },
     {
       path: '/views/AdminLogin',
