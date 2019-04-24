@@ -296,7 +296,7 @@ app.use('/applyadoption', function (req, res) {
   var app_user = req.body.app_user
   var app_adoption = req.body.app_adoption
   var app_content = req.body.app_content
-  var app_status = '未通过'
+  var app_status = '待审核'
   var app_date = req.body.app_date
   connection.query(sqlString,[app_adoption],function (err, results) {
     var sqlString = sqlStr.GET_ROW+"application"
