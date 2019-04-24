@@ -1,14 +1,14 @@
 <template lang="html">
   <div class="box">
-    <myCanvas :dotsNum="dotsNum" :isColor="false"></myCanvas>
+    <!-- <myCanvas :dotsNum="dotsNum" :isColor="false"></myCanvas> -->
     <div class="unreviewed-box">
       <div class="ado-title">{{ado_title}}</div>
       <div class="ado-date">日期：{{ado_date}}</div>
       <div class="ado-master">发起人：{{ado_master}}</div>
       <div class="ado-id">领养ID：{{ado_id}}</div>
       <div class="ado-status">审核状态：{{ado_status}}</div>
-      <div class="ado-content">基本情况：{{ado_content}}</div>
-      <div class="ado-img">{{ado_img}}</div>
+      <div class="ado-content">基本情况：</div>
+      <div class="ado-img" v-html="ado_content"></div>
       <button class="pass" v-on:click="pass">通过</button>
       <button class="nopass" v-on:click="nopass" >不通过</button>
     </div>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import myCanvas from 'vue-atom-canvas'
 export default {
   name: 'Unreviewed',
@@ -50,18 +51,22 @@ methods: {
     getUnreviewed: function() {
       const self = this
       this.ado_id=this.getUrl()
-      if(typeof(this.ado_id) =="undefined"){
+      if(typeof(this.ado_id) =="undefined"){//Unreviewed/
 
       }else{
-        axios.post('http://localhost:3000/getunreviewed',{ado_id: this.ado_id})
+        axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
         .then(function (response) {
-          self.ado_title=response.data.ado_title
-          self.ado_id=response.data.ado_id
-          self.ado_date=response.data.ado_date
-          self.ado_master=response.data.ado_master
-          self.ado_content=response.data.ado_content
-          self.ado_img=response.data.ado_img
-          self.ado_status=response.data.ado_status
+          if(response.data =='404'){
+
+          }else{
+            self.ado_title=response.data.ado_title
+            self.ado_id=response.data.ado_id
+            self.ado_date=response.data.ado_date
+            self.ado_master=response.data.ado_master
+            self.ado_content=response.data.ado_content
+            self.ado_img=response.data.ado_img
+            self.ado_status=response.data.ado_status
+          }
         })
       }
     },
@@ -136,7 +141,7 @@ methods: {
 }
 .ado-img{
   position: absolute;
-  top: 220px;
+  top: 280px;
   width: 700px;
   height: 600px;
   border: 5px solid white;
