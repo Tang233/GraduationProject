@@ -174,41 +174,41 @@ app.post('/adminlogin', function (req, res ) {
 })
 
 //添加领养信息
-app.post('/newadoption', function (req, res) {
-
-  res.header('Access-Control-Allow-Origin', req.header('Origin'));
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-  res.header( "Access-Control-Max-Age", "1000" ); //
-  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-
-  var sqlString = sqlStr.GET_ROW +"adoption";
-  connection.query(sqlString,[],function (err, results) {
-    var sqlString = sqlStr.NEW_ADOPTION;
-
-    var ado_id = 100000+results[0].count+1;
-
-    var ado_master = req.body.ado_master;
-    var ado_title = req.body.ado_title;
-    var ado_image = req.body.ado_image;
-    var ado_content = req.body.ado_content;
-    var ado_status = '未审核';
-    var ado_date = req.body.ado_date;
-    var arr = [ado_id,ado_master,ado_title,ado_image,ado_content,ado_status]
-    for (var i in arr){
-      console.log(arr[i])
-    }
-    connection.query(sqlString,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status,ado_date],function(err, results) {
-      if(err) {
-        console.log(err.message)
-      }
-      console.log("新建领养信息成功");
-      res.end("新建领养信息成功")
-    })
-  })
-
-});
+// app.post('/newadoption', function (req, res) {
+//
+//   res.header('Access-Control-Allow-Origin', req.header('Origin'));
+//   res.header('Access-Control-Allow-Credentials', true);
+//   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+//   res.header( "Access-Control-Max-Age", "1000" ); //
+//   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+//
+//   var sqlString = sqlStr.GET_ROW +"adoption";
+//   connection.query(sqlString,[],function (err, results) {
+//     var sqlString = sqlStr.NEW_ADOPTION;
+//
+//     var ado_id = 100000+results[0].count+1;
+//
+//     var ado_master = req.body.ado_master;
+//     var ado_title = req.body.ado_title;
+//     var ado_image = req.body.ado_image;
+//     var ado_content = req.body.ado_content;
+//     var ado_status = '待审核';
+//     var ado_date = req.body.ado_date;
+//     var arr = [ado_id,ado_master,ado_title,ado_image,ado_content,ado_status]
+//     for (var i in arr){
+//       console.log(arr[i])
+//     }
+//     connection.query(sqlString,[ado_id,ado_master,ado_title,ado_image,ado_content,ado_status,ado_date],function(err, results) {
+//       if(err) {
+//         console.log(err.message)
+//       }
+//       console.log("新建领养信息成功");
+//       res.end("新建领养信息成功")
+//     })
+//   })
+//
+// })
 
 //获取用户信息通过ID
 app.use('/getuserinfo', function (req, res) {
@@ -223,17 +223,22 @@ app.use('/getuserinfo', function (req, res) {
   var sqlString = sqlStr.FIND_USER_BY_ID
   var user_id = req.body.user_id;
   if(user_id ==''){
-    res.send("不能为空")
+    res.send("404")
+  }else{
+    connection.query(sqlString,[user_id],function (err, results) {
+      if(results.length == 0){
+        res.send("404")
+      }else{
+        var json = results[0]
+        // for(var i in results){
+        //   console.log(json)
+        //   console.log(results[i])
+        // }
+        res.write(JSON.stringify(json))
+        res.end()
+      }
+    })
   }
-  connection.query(sqlString,[user_id],function (err, results) {
-    var json = results[0]
-    for(var i in results){
-      console.log(json)
-      console.log(results[i])
-    }
-    res.write(JSON.stringify(json))
-    res.end()
-  })
 })
 
 //获取所有未审核的领养信息
@@ -280,7 +285,7 @@ app.use('/getadoption', function (req, res) {
     res.write(JSON.stringify(json));
     res.end();
   })
-});
+})
 
 //申请领养
 app.use('/applyadoption', function (req, res) {

@@ -54,19 +54,6 @@ return JSON: {
 }
 ```
 
-Function: New Adoption
-```
-Method: POST
-Path: /newadoption
-JSON: {
-  ado_master: "",
-  ado_title: "",
-  ado_image: "",
-  ado_content: "",
-  ado_date: new Date().toLocaleDateString()
-}
-```
-
 Function: Apply Adoption
 ```
 Method: POST
@@ -115,6 +102,23 @@ return JSON: [{
 
 ```
 
+Function: Get Adoption By ID
+```
+Method: POST
+Path:/getadoptioninfo
+JSON:{
+  ado_id:""
+}
+return JSON:{
+  ado_id: "",
+  ado_master: "",
+  ado_title: "",
+  ado_image: "",
+  ado_content: "",
+  ado_status: "",
+  ado_date: ""
+}
+```
 ---
 
 ## Get From Server:
