@@ -1,5 +1,7 @@
 <template lang="html">
-<myCanvas :dotsNum="dotsNum" :isColor="false"></myCanvas>
+<!-- <myCanvas :dotsNum="dotsNum" :isColor="false"></myCanvas> -->
+
+
 </template>
 
 <script>

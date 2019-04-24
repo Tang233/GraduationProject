@@ -62,11 +62,26 @@ export default {
         }
       }
     },
+    getCookie: function (user_id) {
+      var str =document.cookie.split(';')
+      var arr
+      for(var i in str) {
+        arr =unescape(str[i])
+        arr =arr.split('=')
+        for(var j in arr) {
+          if(user_id===arr[j]){
+            console.log(arr[Number(j)+1])
+            return arr[Number(j)+1]
+          }
+        }
+      }
+    },
     getAdoInfo(){
       const self = this
       this.ado_id=this.getUrl()
+      //无效id
       if(typeof(this.ado_id) =="undefined"){
-
+        self.$router.push('/views/UserNotFound')
       }else{
         axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
         .then(function (response) {
