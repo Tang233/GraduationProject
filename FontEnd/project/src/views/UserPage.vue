@@ -78,7 +78,7 @@ export default {
       }
     },
     modifypage(){
-      seen: 'false'
+      alert("这是自己的页面")
     },
     sendmodify(){
 
@@ -94,14 +94,18 @@ export default {
         if(this.user_id!=name){
           axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
           .then(function (response) {
-            self.user_id=response.data.user_id
-            self.user_email=response.data.user_email
-            self.user_mobile=response.data.user_mobile
-            console.log(self.user_id)
-            console.log(self.user_email)
-            console.log(self.user_mobile)
-            if(this.user_id === name){
-              this.modifypage()
+            if(typeof(response.data)=='number'){
+                self.$router.push('/views/UserNotFound')
+            }else{
+              self.user_id=response.data.user_id
+              self.user_email=response.data.user_email
+              self.user_mobile=response.data.user_mobile
+              console.log(self.user_id)
+              console.log(self.user_email)
+              console.log(self.user_mobile)
+              if(self.user_id === name){
+                modifypage()
+              }
             }
           })
         }else{

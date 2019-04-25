@@ -4,7 +4,7 @@
       <div class="login-box">
         <h2>登录</h2>
         <div ><input class="username" type="text" placeholder="请输入用户名" v-model="username"></div>
-        <div ><input class="userpwd" type="text" placeholder="请输入密码" v-model="password"></div>
+        <div ><input class="userpwd" type="password" placeholder="请输入密码" v-model="password"></div>
         <div ><button type="button" v-on:click="Login">登录</button></div>
         <div class="regist"><a href="/views/regist">没有账号？马上注册</a></div>
         <p>{{cookie}}</p>
@@ -236,6 +236,8 @@ import axios from 'axios'
     z-index: -1;
     top: 0;
     left: 0;
+
+
 }
 .box{
   position: absolute;
