@@ -27,7 +27,7 @@
       <div class="user-email">邮箱：<input type="text" v-model="muser_email"></div>
       <div class="user_mobile">联系方式：<input type="text" v-model="muser_mobile"></div>
       <div class="modify-btn">
-        <button type="button" v-on:click="modifyInfo">确认修改</button>
+        <button type="button" v-on:click="sendmodify">确认修改</button>
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@ export default {
     modifypage(){
       seen: 'false'
     },
-    modifyInfo(){
+    sendmodify(){
 
     },
     getUserInfo(){
@@ -100,9 +100,13 @@ export default {
             console.log(self.user_id)
             console.log(self.user_email)
             console.log(self.user_mobile)
+            if(this.user_id === name){
+              this.modifypage()
+            }
           })
         }else{
-          this.modifyInfo()
+          seen: 'false'
+          this.sendmodifyInfo()
         }
       }
     }

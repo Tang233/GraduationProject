@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Nav from '@/components/Nav.vue'
 import AdoPage from '@/components/AdoPage.vue'
+import ApplyAdoption from '@/components/ApplyAdoption.vue'
 import Unreviewed from '@/components/Unreviewed.vue'
 import AdminLogin from '@/views/AdminLogin.vue'
 import AdminHome from '@/views/AdminHome.vue'
@@ -31,6 +32,14 @@ export default new Router({
       path: '/components/AdoPage',
       name: 'AdoPage',
       component: AdoPage,
+      children:[{
+        path: '*'
+      }]
+    },
+    {
+      path: '/components/ApplyAdoption',
+      name: 'ApplyAdoption',
+      component: ApplyAdoption,
       children:[{
         path: '*'
       }]
