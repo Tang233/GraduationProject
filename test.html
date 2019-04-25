@@ -1,0 +1,80 @@
+AdoPage
+        待审核     管理员可以看
+        已通过       用户可以看
+        未通过
+        已领养
+
+mounted
+1 区别管理员用户 用cookie
+2 查看当前页面是否有效（ID不正确，该用户不可视,正常观看）
+3 管理员可以审核 状态为待审核 的领养信息
+
+结果有3种
+1 页面无效  （跳转去404页面）
+2 正常观看
+3 管理员审核  （有两个按钮（v-if实现）)
+
+
+if url == 'undefined'{
+  页面无效  1
+}
+
+if response.data =='not found'{
+  页面无效  1
+}
+
+if cookie ==管理员{
+  if ado_status == 待审核{
+    管理员审核 3
+  }else{
+
+    正常观看 2
+  }
+}else{
+  if cookie == 用户 {
+    if ado_status ==已通过 {
+      正常观看  2
+    }else{
+      页面无效  1
+    }
+  }
+}
+user_id
+baojian123
+mobile=112309128
+
+
+UserPage
+
+结果两种
+1有效ID （自己的主页，别人的）
+2无效ID（undefined, 没有这个id）
+
+if null{
+
+}else{
+  发送请求{
+    if ID错误
+  }
+}
+
+if null{
+
+}else if ID 错误{
+
+}else if{
+  发送请求
+}
+cookie baojian123
+
+input
+http://localhosthost:8080/views/UserPage/
+http://localhosthost:8080/views/UserPage/asfjlks
+http://localhosthost:8080/views/UserPage/baojian123
+http://localhosthost:8080/views/UserPage/张三
+
+output
+false
+false
+true 自己的主页
+ture 别人的页面

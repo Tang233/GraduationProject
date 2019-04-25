@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Nav from '@/components/Nav.vue'
 import AdoPage from '@/components/AdoPage.vue'
+import ApplyAdoption from '@/components/ApplyAdoption.vue'
 import Unreviewed from '@/components/Unreviewed.vue'
 import AdminLogin from '@/views/AdminLogin.vue'
 import AdminHome from '@/views/AdminHome.vue'
@@ -10,6 +11,7 @@ import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import UserPage from '@/views/UserPage.vue'
+import UserNotFound from '@/views/UserNotFound.vue'
 
 Vue.use(Router)
 
@@ -30,6 +32,14 @@ export default new Router({
       path: '/components/AdoPage',
       name: 'AdoPage',
       component: AdoPage,
+      children:[{
+        path: '*'
+      }]
+    },
+    {
+      path: '/components/ApplyAdoption',
+      name: 'ApplyAdoption',
+      component: ApplyAdoption,
       children:[{
         path: '*'
       }]
@@ -71,6 +81,14 @@ export default new Router({
       path: '/views/UserPage',
       name: 'UserPage',
       component: UserPage,
+      children:[{
+        path:"*"
+      }]
+    },
+    {
+      path: '/views/UserNotFound',
+      name: 'UserNotFound',
+      component: UserNotFound,
       children:[{
         path:"*"
       }]
