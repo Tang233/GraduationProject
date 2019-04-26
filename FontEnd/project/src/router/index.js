@@ -10,6 +10,7 @@ import AdminHome from '@/views/AdminHome.vue'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
+import ChangePwd from '@/views/ChangePwd.vue'
 import UserPage from '@/views/UserPage.vue'
 import UserNotFound from '@/views/UserNotFound.vue'
 
@@ -76,6 +77,14 @@ export default new Router({
       path: '/views/regist',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/views/ChangePwd',
+      name: 'ChangePwd',
+      component: ChangePwd,
+      children:[{
+        path:"*"
+      }]
     },
     {
       path: '/views/UserPage',
