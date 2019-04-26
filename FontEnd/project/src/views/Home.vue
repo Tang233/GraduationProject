@@ -42,8 +42,21 @@ export default {
     }
   },
   methods: {
+    getCookie(name) {
+      var arr = document.cookie.split(';')
+      console.log(arr)
+      for(var i in arr) {
+        var str = unescape(arr[i])
+        str = str.split('=')
+        if(str[0]==name){
+          return str[1]
+        }
+      }
+    },
     getAdoption(){
     const self = this
+    console.log(this.getCookie('user_id'))
+    // console.log
     axios.post('http://localhost:3000/getadoption',{})
       .then(function (response) {
         var reg = /<img src="data:image\/jpeg;base64,[^\n]*">/;

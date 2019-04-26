@@ -78,7 +78,7 @@ export default {
       }
     },
     modifypage(){
-      seen: 'false'
+      // alert("11")
     },
     sendmodify(){
 
@@ -97,11 +97,11 @@ export default {
             self.user_id=response.data.user_id
             self.user_email=response.data.user_email
             self.user_mobile=response.data.user_mobile
-            console.log(self.user_id)
-            console.log(self.user_email)
-            console.log(self.user_mobile)
-            if(this.user_id === name){
-              this.modifypage()
+            // console.log(self.user_id)
+            // console.log(self.user_email)
+            // console.log(self.user_mobile)
+            if(self.user_id === name){
+              self.modifypage()
             }
           })
         }else{

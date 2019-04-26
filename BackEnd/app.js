@@ -10,7 +10,7 @@ var cors = require('cors');
 var sqlStr = require('./sqlString');
 
 
-var cookieConfigure={maxAge:3000,path:'/',httpOnly:false};
+var cookieConfigure={maxAge:30000000,path:'/',httpOnly:false};
 app.use(bodyParser.json());
 // app.use(cookieParser())
 app.use(cors({origin:true, credentials:true}));
@@ -48,12 +48,15 @@ app.get('/',function (req,res) {
 
 //用户登录
 app.post('/login',function ( req , res ) {
+  // res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Origin', req.header('Origin'));
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
   res.header( "Access-Control-Max-Age", "1000" ); //
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+
 
   var sqlString=sqlStr.FIND_USER_BY_ID;
   console.log(sqlString)
