@@ -1,11 +1,12 @@
 <template lang="html">
 <div class="box":style="{backgroundColor:color}">
-
+    <ButtonSet></ButtonSet>
     <div class="first-menu">
 
       <div class="logo"><img src="../../images/logo.png"></div>
-      <div class="homepage"><router-link :to="{ path: '/views/home'}">首页</router-link></div>
-      <div class="userpage"><router-link :to="{ path: '/views/userPage'}">个人主页</router-link></div>
+      <div class="homepage"><router-link :to="{ path: '/'}">首页</router-link></div>
+      <div class="userpage"><a :href="url">个人主页</a></div>
+      <!-- <div class="userpage"><router-link :to="{ path: '/views/UserPage/' + id}">个人主页</router-link></div> -->
       <div class="myado"><a href="#">我的领养</a></div>
 
       <div class="sec-box" @mouseenter="secondMenu=true" @mouseleave="secondMenu=false">
@@ -18,9 +19,16 @@
         </div>
       </div>
 
-      <div class="nav-right">
-        <div class="button"><router-link :to="{ path: '/views/login' }">登录</router-link></div>
-        <div class="button"><router-link :to="{ path: '/views/regist' }">注册</router-link></div>
+      <div class="nav-right" v-if="!is_Logined">
+        <div class="button"><router-link :to="{ path: '/login' }">登录</router-link></div>
+        <div class="button"><router-link :to="{ path: '/register' }">注册</router-link></div>
+      </div>
+      <div class="nav-right" v-if="is_Logined">
+        <div class="user-icon">
+          <a :href="url">
+            <img :src="iconURL" alt="">
+          </a>
+        </div>
       </div>
     </div>
 
@@ -29,13 +37,42 @@
 
 <script>
 import axios from 'axios'
+import ButtonSet from  './ButtonSet.vue'
 export default {
   name:'Nav',
   props:['color'],
   data () {
     return {
-      secondMenu: false
+      secondMenu: false,
+      id: "",
+      is_Logined: false,
+      url:"http://localhost:8080/views/UserPage/",
+      iconURL: require("../assets/icon.jpg")
     }
+  },
+  methods:{
+    getCookie(name){
+      const self =this
+      var str = document.cookie.split(';')
+      var arr
+      for (var i in str){
+        arr = unescape(str[i])
+        arr = arr.split('=')
+        for(var j in arr)
+        if(arr[j] == name){
+          self.id = arr [Number(j)+1]
+          self.is_Logined = true
+          self.url +=self.id
+        }
+      }
+    }
+  },
+  mounted(){
+    this.getCookie('user_id')
+    // console.log("lala"+this.user_id)
+  },
+  components:{
+    ButtonSet
   }
 }
 </script>
@@ -119,7 +156,7 @@ a{
   flex-direction: row;
   justify-content: space-around;
 }
-.nav-right>div>a{
+.nav-right>.button>a{
   position:relative;
   text-decoration: none;
   color: black;
@@ -128,5 +165,21 @@ a{
   top: 15px;
   margin: 15px;
   padding: 7px;
+}
+.user-icon{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.user-icon img{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:2px solid #ffffff;
+}
+.user-icon>a{
+  width:54px;
+  height:54px;
+  border-radius:50%;
 }
 </style>

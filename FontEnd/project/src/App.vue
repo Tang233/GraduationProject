@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="background">
+
+    </div>
     <router-view/>
   </div>
 </template>
@@ -30,5 +33,13 @@ html,body{
   top:0px;
   left: 0px;
   border: hidden;
+}
+.background{
+  position:fixed;
+  top:0%;
+  left:0%;
+  bottom:0%;
+  right:0%;
+  background-color: #FDFDC4;
 }
 </style>

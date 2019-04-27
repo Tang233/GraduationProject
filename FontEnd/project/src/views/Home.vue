@@ -1,7 +1,6 @@
 <template>
     <div class="home-box">
       <Nav :color="bgd"></Nav>
-      <ButtonSet></ButtonSet>
       <div class="ado-table">
         <div class="ado-item"  v-for="item in ado_list">
           <div class="top">
@@ -81,9 +80,7 @@ export default {
 </script>
 
 <style lang="css">
-body{
-  background-color: #FDFDC4;
-}
+
 .home-box{
   position: absolute;
   width: 100%;

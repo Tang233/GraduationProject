@@ -12,6 +12,7 @@ import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import UserPage from '@/views/UserPage.vue'
 import UserNotFound from '@/views/UserNotFound.vue'
+// import AvatorTailor from "@/components/avator-tailor.vue"
 
 Vue.use(Router)
 
@@ -19,7 +20,7 @@ export default new Router({
   mode:'history',
   routes: [
     {
-      path: '/',
+      path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld
     },
@@ -63,17 +64,17 @@ export default new Router({
       }]
     },
     {
-      path: '/views/home',
+      path: '/',
       name: 'Home',
       component: Home
     },
     {
-      path: '/views/login',
+      path: '/login',
       name: 'Login',
       component: Login
     },
     {
-      path: '/views/regist',
+      path: '/register',
       name: 'Register',
       component: Register
     },

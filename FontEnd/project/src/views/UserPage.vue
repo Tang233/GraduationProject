@@ -2,7 +2,7 @@
 <div class="body-style" >
   <Nav :color="bgd"></Nav>
 
-  <div class="user-box" v-if="seen">
+  <div class="user-box"v-if="seen">
     <div class="icon-box">
       <img src="../../images/icon.jpg" alt="">
     </div>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="user-box" v-if="userseen">
+  <div class="user-box" v-if="!seen">
     <div class="icon-box">
       <img src="../../images/icon.jpg" alt="">
     </div>
@@ -51,7 +51,7 @@ export default {
       bgd:'#5f6975',
       muser_email: '',
       muser_mobile: '',
-      seen: 'true'
+      seen: true
     }
   },
   methods: {
@@ -78,7 +78,7 @@ export default {
       }
     },
     modifypage(){
-      // alert("11")
+      alert("这是自己的页面")
     },
     sendmodify(){
 
@@ -90,24 +90,27 @@ export default {
         self.$router.push('/views/UserNotFound')
       }
       else{
-        var name=this.getCookie(this.user_id)
-        if(this.user_id!=name){
-          axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
-          .then(function (response) {
+        var name=this.getCookie("user_id")
+        if(this.user_id==name){
+          this.modifypage()
+        }
+        else{
+          // seen=false
+          // this.sendmodifyInfo()
+        }
+        axios.post('http://localhost:3000/getuserinfo', {user_id: this.user_id})
+        .then(function (response) {
+          if(typeof(response.data)=='number'){
+            self.$router.push('/views/UserNotFound')
+          }else{
             self.user_id=response.data.user_id
             self.user_email=response.data.user_email
             self.user_mobile=response.data.user_mobile
-            // console.log(self.user_id)
-            // console.log(self.user_email)
-            // console.log(self.user_mobile)
-            if(self.user_id === name){
-              self.modifypage()
-            }
-          })
-        }else{
-          seen: 'false'
-          this.sendmodifyInfo()
-        }
+            console.log(self.user_id)
+            console.log(self.user_email)
+            console.log(self.user_mobile)
+          }
+        })
       }
     }
   },
@@ -137,6 +140,7 @@ export default {
   border-radius: 10px;
   box-shadow: 5px 5px 15px #3A3F4B;
   background-color: #FFE8CF;
+  z-index:2;
 }
 
 .icon-box{

@@ -10,7 +10,7 @@ var cors = require('cors');
 var sqlStr = require('./sqlString');
 
 
-var cookieConfigure={maxAge:30000000,path:'/',httpOnly:false};
+var cookieConfigure={maxAge:24*60*60*1000,path:'/',httpOnly:false};
 app.use(bodyParser.json());
 // app.use(cookieParser())
 app.use(cors({origin:true, credentials:true}));
