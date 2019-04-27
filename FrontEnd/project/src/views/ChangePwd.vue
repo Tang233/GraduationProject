@@ -44,7 +44,7 @@ export default {
     },
     ModifyPwd: function () {
       const self=this
-      var userid=thi.getCookie(user_id)
+      var userid=this.getCookie(user_id)
       axios.post('http://localhost:3000/changepwd',{})
     }
   },
