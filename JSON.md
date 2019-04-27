@@ -54,6 +54,19 @@ return JSON: {
 }
 ```
 
+Function: New Adoption
+```
+Method:POST
+Path: /newadoption
+JSON: {
+  ado_master:"",
+  ado_title:"",
+  ado_content: "",
+  ado_image:"",
+  ado_date: new Date().toLocaleDateString()
+}
+```
+
 Function: Apply Adoption
 ```
 Method: POST
