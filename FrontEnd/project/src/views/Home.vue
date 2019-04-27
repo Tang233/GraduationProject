@@ -58,13 +58,18 @@ export default {
     // console.log
     axios.post('http://localhost:3000/getadoption',{})
       .then(function (response) {
-        var reg = /<img src="data:image\/jpeg;base64,[^\n]*">/;
+        var reg = /<img src="data:image\/[a-z]*;base64,[^\n]*">/;
         self.ado_list = response.data
         for(var i in self.ado_list){
           self.ado_list[i].ado_date = new Date(self.ado_list[i].ado_date).toLocaleDateString()
           self.ado_list[i].ado_content = self.ado_list[i].ado_content.match(reg)
+
           if (self.ado_list[i].ado_content!=null){
             self.ado_list[i].ado_content = self.ado_list[i].ado_content[0]
+          }
+          else{
+            self.ado_list[i].ado_content = '<img src='+require('../../images/icon.jpg')+'>'
+            // alert(self.ado_list[i].ado_content)
           }
         }
       })

@@ -1,7 +1,8 @@
 <template lang="html">
 <div class="div-box">
   <Nav :color="bgd"></Nav>
-  <div class="ado-box">
+  <div class="adoption">
+    <div class="ado-box">
       <div class="ado-title"><span>{{ado_title}}</span></div>
       <div class="ado-date">
         <span>日期：{{ado_date}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -9,14 +10,15 @@
         <span>领养ID：{{ado_id}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>审核状态：{{ado_status}}</span>
       </div>
+      <div class="title-one"> <p>基本情况：</p></div>
       <div class="ado-button">
-         <button type="button" name="button">申请领养</button>
+        <button type="button" name="button">申请领养</button>
       </div>
 
-      <div class="title-one"> <p>基本情况：</p></div>
       <div class="ado-content" ><span v-html="ado_content"></span><br/></div>
+    </div>
   </div>
-  <div class="image-box">
+  <!-- <div class="image-box">
     <div class="title-two"><p>宠物相片：</p></div>
 
     <div class="ado-image">
@@ -31,7 +33,7 @@
       <div class="ado-image">
         <div>{{ado_img}}</div>
       </div>
-  </div>
+  </div> -->
 
 </div>
 </template>
@@ -85,7 +87,7 @@ export default {
       }else{
         axios.post('http://localhost:3000/getadoptioninfo',{ado_id: this.ado_id})
         .then(function (response) {
-          self.ado_date=response.data.ado_date
+          self.ado_date=new Date(response.data.ado_date).toLocaleDateString()
           self.ado_id=response.data.ado_id
           self.ado_master=response.data.ado_master
           self.ado_status=response.data.ado_status
@@ -108,28 +110,49 @@ export default {
 <style lang="css">
 body{
   background-color: #FDFDC4;
+}.passage>.quill-editor:not(.bubble) .ql-container,
+.passage>.quill-editor:not(.bubble) .ql-container .ql-editor {
+  min-height: 10rem;
+  max-height: 25rem;
+  padding-bottom: 1rem;
+}
+.adoption{
+  position:absolute;
+  top:100px;
+  left:20%;
+}
+.editor {
+  width:931.51px;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+}
+.passage-editor{
+  position:absolute;
+  top:100px;
+  left:20%;
+}
+.passage>.quill-editor{
+  width:850px;
 }
 .div-box{
   position: absolute;
   height: 100%;
   width: 100%;
-
 }
+
+
 .ado-box{
-  position: absolute;
-  top: 100px;
-  left: 20%;
   margin: 5px;
   padding: 10px;
-  width: 60%;
-  height: 100%;
+  width: 931.51px;
+  min-height: 500px;
   box-shadow: 0px 5px 15px #777777;
   border-radius: 10px;
   background-color: #FFE8CF;
 
 }
 .ado-title{
-  position: absolute;
   padding: 5px;
   margin: 15px;
   width: 300px;
@@ -137,7 +160,7 @@ body{
   font-size: 2rem;
 }
 .ado-button>button{
-  position: relative;
+  position: absolute;
   top: 15px;
   left: 700px;
   width: 100px;
@@ -149,24 +172,20 @@ body{
   border: 1px solid;
 }
 .ado-date{
-  position: absolute;
   top: 80px;
   left: 30px;
 }
 .title-one{
-  position: absolute;
   left: 30px;
-  top: 115px;
+  margin-top: 25px;
   font-family: "微软雅黑";
   font-size: 1.2rem;
 
 }
 .ado-content{
-  position: relative;
-  left: 16px;
-  top: 55px;
-  width: 775px;
-  height: 100px;
+  margin-left: 16px;
+  width: 880px;
+  min-height: 300px;
   border: 1px solid;
   border-radius: 10px;
   margin-top: 30px;
