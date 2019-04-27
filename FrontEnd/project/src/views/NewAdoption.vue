@@ -1,14 +1,7 @@
 <template id="">
   <div class="">
     <Navigation :color="bgd"></Navigation>
-    <div class="preview">
-      <div class="content" v-html="adoption.ado_content">
-
-      </div>
-    </div>
-    <div class="editor">
       <PassageEditor :content="adoption.ado_content"></PassageEditor>
-    </div>
   </div>
 </template>
 
@@ -24,7 +17,7 @@ export default{
       adoption:{
         ado_master: "",
         ado_title: "",
-        ado_content: "",
+        ado_content: "123123123",
         ado_image: "",
         ado_date: new Date().toLocaleDateString()
       }
@@ -49,9 +42,5 @@ export default{
 </script>
 
 <style scoped>
-.editor{
-  position:absolute;
-  top:20%;
-  left:20%;
-}
+
 </style>

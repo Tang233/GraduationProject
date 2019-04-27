@@ -24,7 +24,7 @@
         <div class="button"><router-link :to="{ path: '/register' }">注册</router-link></div>
       </div>
       <div class="nav-right" v-if="is_Logined">
-        <div class="user-icon">
+        <div class="user-icon" :title="id">
           <a :href="url">
             <img :src="iconURL" alt="">
           </a>
