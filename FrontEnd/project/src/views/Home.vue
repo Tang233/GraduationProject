@@ -1,8 +1,12 @@
 <template>
     <div class="home-box">
       <Nav :color="bgd"></Nav>
+      <div class="search">
+        搜索关键字:<input type="text" name="" value="" v-model="keyword">
+        <button type="button" name="button" @click="Search">搜索</button>
+      </div>
       <div class="ado-table">
-        <div class="ado-item"  v-for="item in ado_list">
+        <div class="ado-item"  v-for="item in results">
           <div class="top">
             <h2>{{item.ado_title}}</h2>
           </div>
@@ -37,7 +41,9 @@ export default {
   data(){
     return{
       bgd:'#5f6975',
-      ado_list:[]
+      ado_list: [],
+      results: [],
+      keyword: ""
     }
   },
   methods: {
@@ -72,7 +78,21 @@ export default {
             // alert(self.ado_list[i].ado_content)
           }
         }
+        self.results=self.ado_list
       })
+    },
+    Search(){
+      this.results=[]
+      var reg = new RegExp("[^\n]*"+this.keyword+"[^\n]*","gim")
+      for(var i in this.ado_list) {
+        for(var j in this.ado_list[i]) {
+          var arr = this.ado_list[i][j].match(reg)
+          if(arr!=null){
+            this.results.push(this.ado_list[i])
+            break
+          }
+        }
+      }
     }
   },
   mounted () {
@@ -90,7 +110,13 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-
+}
+.search{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  top: 80px;
+  left: 17%;
 }
 .ado-table{
   position: absolute;
@@ -100,7 +126,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
-  top: 90px;
+  top: 120px;
   left: 17%;
   width: 900px;
   border-radius: 10px;

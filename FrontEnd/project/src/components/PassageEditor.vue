@@ -16,14 +16,18 @@
       </div>
     </div>
     <!-- <div class="preview" v-html="content"></div> -->
-    <div class=" editor">
-      <div class="passage">
-        <h3>标题：</h3><input type="text" name="" value="" v-model="adoption.ado_title">
-        <quillEditor v-model="adoption.ado_content" :options="editorOption"></quillEditor>
+    <div class="ado-box" style="margin-top:20px;">
+      <div class=" editor">
+        <div class="passage">
+          <div style="margin-bottom:20px">
+            <h3>标题：</h3><input type="text" name="" value="" v-model="adoption.ado_title">
+          </div>
+          <quillEditor v-model="adoption.ado_content" :options="editorOption"></quillEditor>
+        </div>
       </div>
+      <button @click="submitContent()" type="button" name="button">提交内容</button>
     </div>
     <!-- <button @click="getContent()" type="button" name="button">查看内容</button> -->
-    <button @click="submitContent()" type="button" name="button">提交内容</button>
   </div>
 </template>
 

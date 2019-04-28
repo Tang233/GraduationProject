@@ -1,15 +1,15 @@
 <template>
   <div class="dialog-background">
-
     <div class="horizontal-center" >
       <div class="vertical-center">
         <div class="dialog" >
-          <div v-if="type === 'html'" class="html">
-            <div class="passage-title">
-              <h1>{{passage.passage_title}}</h1>
-            </div>
-            <div class="passage-content"  v-html="passage.passage_content">
-
+          <div class="html">
+            <div class="">
+              <h3>请输入申请信息</h3>
+              <div class="passage-content">
+                <textarea rows="8" cols="80"v-model="application.app_content">不能超过140字</textarea>
+              </div>
+              <button type="button" name="button" @click="ApplyAdoption">提交申请</button>
             </div>
           </div>
         </div>
@@ -22,34 +22,24 @@
 </template>
 
 <script>
-// import axios from 'axios'
-import '@/css/base.css'
+import axios from 'axios'
+// import '@/css/base.css'
 export default {
   name: 'Dialog',
-  props: ['type', 'passage'],
+  props: ['application'],
   data () {
     return {
-      user: {
-        user_id: '',
-        user_pwd: '',
-        repeat_pwd: ''
-      }
     }
   },
   methods: {
-    submitData: function () {
-      // // const self = this
-      // var url
-      // if (this.type === 'login') {
-      //   url = 'http://localhost:3000/login'
-      // }
-      // if (this.type === 'register') {
-      //   url = 'http://localhost:3000/register'
-      // }
-      // axios.post(url, this.user)
-      //   .then(function (response) {
-      //
-      //   })
+    ApplyAdoption () {
+      const self = this
+      this.application.app_date = new Date().toLocaleDateString()
+      axios.post('http://localhost:3000/applyadoption',this.application)
+        .then(function (response) {
+          self.$emit('closeDialog', false)
+          alert(response.data)
+        })
     },
     closeDialog: function () {
       this.$emit('closeDialog', false)
@@ -58,7 +48,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .dialog-background{
   position: fixed;
   z-index: 5;
@@ -89,15 +79,16 @@ export default {
   height:100%;
 }
 .dialog {
-  min-width:500px;
-  min-height:400px;
+  width:700px;
+  height:300px;
   border-radius: 5px;
   background-color:#ffffff;
   z-index: 12;
 }
 .html {
-  min-width:800px;
-  max-width:800px;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
 }
 .passage-title {
   text-align: center;

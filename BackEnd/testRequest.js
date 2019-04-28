@@ -32,13 +32,13 @@ var http=require('http');
     //   }
     // }
 postData = {
-  user_id:"baoj",
+  ado_id:"100001"
 }
 
 var options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/getuserinfo',
+  path: '/getadoptioninfo',
   method: 'POST',
   json: true,
   rejectUnauthorized: true,

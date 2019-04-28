@@ -15,6 +15,7 @@ import UserPage from '@/views/UserPage.vue'
 import UserNotFound from '@/views/UserNotFound.vue'
 // import AvatorTailor from "@/components/avator-tailor.vue"
 import NewAdoption from "@/views/NewAdoption.vue"
+import UserApplication from "@/views/UserApplication.vue"
 Vue.use(Router)
 
 export default new Router({
@@ -107,6 +108,11 @@ export default new Router({
       path: '/NewAdoption',
       name: "NewAdoption",
       component: NewAdoption
+    },
+    {
+      path: '/UserApplication',
+      name: "UserApplication",
+      component: UserApplication
     }
   ]
 })
