@@ -1,0 +1,28 @@
+body {
+  background-color: #DFDFE1;
+}
+.button {
+  border:1px solid #888888;
+  cursor:pointer;
+  border-radius:3px;
+  padding:5px;
+  color: #ffffff;
+}
+.big-icon>img {
+  width:100px;
+  height:100px;
+  border-radius:50%;
+}
+.small-icon>img {
+  width:40px;
+  height:40px;
+  border-radius:50%;
+}
+a {
+  color:#999999;
+  text-decoration:none;
+}
+a:visited {
+  color:#999999;
+  text-decoration:none;
+}

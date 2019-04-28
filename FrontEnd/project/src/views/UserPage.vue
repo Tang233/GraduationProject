@@ -32,8 +32,24 @@
     </div>
   </div>
 
-
-  <div class="apply-info"></div>
+  <div class="apply-info" >
+    <div class="table" v-for="item in adoption_list">
+      <div class="row">
+        <div class="column">
+          {{item.ado_id}}
+        </div>
+        <div class="column">
+          {{item.ado_title}}
+        </div>
+        <div class="column">
+          {{item.ado_status}}
+        </div>
+        <div class="column">
+          {{item.ado_date}}
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 </template>
@@ -51,7 +67,8 @@ export default {
       bgd:'#5f6975',
       muser_email: '',
       muser_mobile: '',
-      seen: true
+      seen: true,
+      adoption_list:[]
     }
   },
   methods: {
@@ -112,10 +129,21 @@ export default {
           }
         })
       }
+    },
+    getAdoption() {
+      const self = this
+      axios.post("http://localhost:3000/getuseradoption",{user_id:this.user_id})
+        .then(function (response) {
+          self.adoption_list = response.data
+          for( var i in self.adoption_list) {
+            self.adoption_list[i].ado_date = new Date(self.adoption_list[i].ado_date).toLocaleDateString()
+          }
+        })
     }
   },
   mounted () {
     this.getUserInfo()
+    this.getAdoption()
   },
   components: {
     Nav
@@ -193,5 +221,9 @@ export default {
   border-radius: 10px;
   box-shadow: 5px 5px 15px #3A3F4B;
   background-color: #FFE8CF;
+}
+.row{
+  display: flex;
+  flex-direction: row;
 }
 </style>

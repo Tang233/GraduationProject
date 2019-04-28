@@ -132,6 +132,59 @@ return JSON:{
   ado_date: ""
 }
 ```
+
+Function: Get User Application
+```
+Method: POST
+Path: /getuserapplication
+JSON:{
+  user_id:""
+}
+return JSON:[{
+  app_id: "",
+  app_user: "",
+  app_adoption: "",
+  app_content: "",
+  app_status: "",
+  app_date: ""
+}]
+```
+
+Function: Get User Adoption
+```
+Method: POST
+Path: /getuseradoption
+JSON:{
+  user_id:""
+}
+return JSON:[{
+  ado_id: "",
+  ado_master: "",
+  ado_title: "",
+  ado_content: "",
+  ado_status: "",
+  ado_date: ""
+}]
+```
+
+Function: Agree Application
+```
+Method: POST
+Path: /agreeapplication
+JSON:{
+  app_id:""
+}
+```
+
+Function: Disagree Application
+```
+Method: POST
+Path: /disagreeapplication
+JSON:{
+  app_id:""
+}
+```
+
 ---
 
 ## Get From Server:

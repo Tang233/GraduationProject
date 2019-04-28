@@ -53,6 +53,9 @@ import axios from 'axios'
     },
     mounted () {
       this.cookie = this.getCookie('user_id');
+      if(typeof(this.cookie) != "undefined") {
+        this.$router.push("/")
+      }
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
       const rndCl = () => Math.floor(Math.random() * 225);

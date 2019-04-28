@@ -81,11 +81,11 @@ CREATE TABLE application(
   app_id varchar(32) not null,
   app_user varchar(32) not null,
   app_adoption varchar(32) not null,
-  app_status varchar(16) not null default '未通过',
+  app_status varchar(16) not null default '待通过',
   app_content text not null,
   CONSTRAINT PRIMARY KEY(app_id),
   CONSTRAINT FOREIGN KEY(app_user) REFERENCES user(user_id),
   CONSTRAINT FOREIGN KEY(app_adoption) REFERENCES adoption(ado_id),
-  CONSTRAINT CHECK(app_status in ('未通过','已通过'))
+  CONSTRAINT CHECK(app_status in ('未通过','已通过','待通过'))
   );
 ```
