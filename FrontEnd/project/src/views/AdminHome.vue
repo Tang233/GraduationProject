@@ -5,7 +5,7 @@
 
     </div>
     <div class="main">
-      <h2>未审核领养信息</h2>
+      <h1>未审核领养信息</h1>
       <div class="row table-header">
         <div class="column">
           领养信息ID

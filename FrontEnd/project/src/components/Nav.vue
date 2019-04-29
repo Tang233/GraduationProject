@@ -14,11 +14,11 @@
       <div class="item myado"><router-link :to="{path:'/UserApplication'}">我的领养</router-link></div>
 
       <div class="item sec-box" @mouseenter="secondMenu=true" @mouseleave="secondMenu=false">
-        <a href="#">我的申请</a>
+        <p>我的申请</p>
         <div style="position:absolute; top:100%;">
           <div class="sec-menu" v-if="secondMenu">
-            <div><router-link :to="{path:'/NewAdoption'}">申请领养</router-link></div>
-            <div><a href="#">申请发表领养帖</a></div>
+            <div><p>申请领养</p></div>
+            <div><router-link :to="{path:'/NewAdoption'}">申请发表领养帖</router-link></div>
           </div>
         </div>
       </div>
@@ -63,12 +63,13 @@ export default {
   data () {
     return {
       user:"",
+      user_icon: "",
       secondMenu: false,
       id: "",
       is_Logined: false,
       is_Admin: false,
       url:"http://localhost:8080/views/UserPage/",
-      iconURL: require("../assets/icon.jpg")
+      iconURL: ""
     }
   },
   methods:{
@@ -91,23 +92,31 @@ export default {
           return arr[Number(j)+1]
         }
       }
+    },
+    getUsericon(){
+      const self = this
+      this.user = this.getCookie("user_id")
+      if(typeof(this.user) == "undefined") {
+        this.user = this.getCookie("admin_id")
+        if(typeof(this.user) == "undefined") {
+          this.is_Logined = false
+        }else{
+          this.is_Logined = true
+          this.is_Admin = true
+        }
+      }else{
+        this.is_Logined = true
+        this.is_Admin = false
+        axios.post('http://localhost:3000/getuserinfo', {user_id: this.user})
+        .then(function (response) {
+            self.iconURL = require("../assets/"+response.data.user_icon)
+          })
+      }
     }
   },
   mounted(){
     // console.log("lala"+this.user_id)
-    this.user = this.getCookie("user_id")
-    if(typeof(this.user) == "undefined") {
-      this.user = this.getCookie("admin_id")
-      if(typeof(this.user) == "undefined") {
-        this.is_Logined = false
-      }else{
-        this.is_Logined = true
-        this.is_Admin = true
-      }
-    }else{
-      this.is_Logined = true
-      this.is_Admin = false
-    }
+    this.getUsericon()
   },
   components:{
     ButtonSet
@@ -121,7 +130,7 @@ a{
   color: black;
   font-family: "微软雅黑";
 }
-.box a{
+.box a,.box p{
   font-size: 1.3rem;
 }
 .first-menu{
@@ -143,6 +152,9 @@ a{
   border-radius: 50%;
   background-color: pink;
 }
+.item{
+  cursor:pointer;
+}
 .logo>a>img{
   width: 60px;
   height: 60px;
@@ -153,9 +165,8 @@ a{
   font-family: "微软雅黑";
   font-size: 1.3rem;
   text-decoration: none;
-
 }
-.first-menu>.item>a{
+.first-menu>.item>a,.first-menu>.item>p{
   position: absolute;
   width: 150px;
   height: 60px;
@@ -179,6 +190,7 @@ a{
   z-index: 999;
 }
 .sec-menu>div{
+  cursor:pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
