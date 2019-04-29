@@ -18,6 +18,9 @@
       <div class="ado-button" v-if="is_Logined&is_Admin&ado_status=='待审核'">
           <button type="button" name="button" @click="Review()">审核通过</button>
           <button type="button" name="button" @click="Refuse()">拒绝通过</button>
+          <div class="backhome">
+            <router-link :to="{ path:'/views/AdminHome'}">返回主页</router-link>
+          </div>
       </div>
       <div class="ado-content" ><span v-html="ado_content"></span><br/></div>
     </div>
@@ -275,6 +278,17 @@ body{
   border-radius: 10px;
   background-color: #FFE8CF;
   border: 1px solid;
+}
+.backhome>a{
+  position: absolute;
+  top: 80px;
+  width: 100px;
+  height: 40px;
+  font-family: "微软雅黑";
+  font-size: 1.2rem;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 10px;
 }
 .ado-date{
   top: 80px;

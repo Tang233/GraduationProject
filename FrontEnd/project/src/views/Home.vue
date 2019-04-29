@@ -12,7 +12,7 @@
           </div>
           <!-- {{item.ado_master}} -->
           <router-link :to="{ path: '/components/AdoPage/' + item.ado_id }">
-            <div class="ado-img" v-html="item.ado_image">
+            <div class="ado-img" v-html="item.ado_content">
             </div>
           </router-link>
           <div class="bottom">
@@ -68,13 +68,13 @@ export default {
         self.ado_list = response.data
         for(var i in self.ado_list){
           self.ado_list[i].ado_date = new Date(self.ado_list[i].ado_date).toLocaleDateString()
-          self.ado_list[i].ado_image = self.ado_list[i].ado_content.match(reg)
+          self.ado_list[i].ado_content = self.ado_list[i].ado_content.match(reg)
 
-          if (self.ado_list[i].ado_image!=null){
-            self.ado_list[i].ado_image = self.ado_list[i].ado_image[0]
+          if (self.ado_list[i].ado_content!=null){
+            self.ado_list[i].ado_content = self.ado_list[i].ado_content[0]
           }
           else{
-            self.ado_list[i].ado_image = '<img src='+require('../../images/icon.jpg')+'>'
+            self.ado_list[i].ado_content = '<img src='+require('../../images/icon.jpg')+'>'
             // alert(self.ado_list[i].ado_content)
           }
         }
@@ -82,31 +82,16 @@ export default {
       })
     },
     Search(){
-      var flag=false
       this.results=[]
       var reg = new RegExp("[^\n]*"+this.keyword+"[^\n]*","gim")
       for(var i in this.ado_list) {
         for(var j in this.ado_list[i]) {
-          if(j=="ado_image"){
-            continue
-          }
-          if(j=="ado_content") { //剔除去图片
-            var temp =/<img src="data:image\/[a-z]*;base64,[^\n]*">/
-            var d= this.ado_list[i][j].match(temp)
-            for(var k in d) {
-              this.ado_list[i][j]=this.ado_list[i][j].replace(d[k],"")
-            }
-          }
           var arr = this.ado_list[i][j].match(reg)
           if(arr!=null){
-            flag=true
             this.results.push(this.ado_list[i])
             break
           }
         }
-      }
-      if(flag==false) {
-        this.results=[]
       }
     }
   },

@@ -6,7 +6,6 @@
       <div ><input class="input" type="text" placeholder="请输入密码" v-model="newPwd"></div>
       <div ><input class="input" type="text" placeholder="请再次输入密码" v-model="repeatPwd"></div>
       <div ><input class="input" type="text" placeholder="请输入邮箱" v-model="newEmail"></div>
-      <div ><input class="input" type="text" placeholder="请设置您的头像" v-model="newIcon"></div>
       <div ><button type="button" v-on:click="Register">注册</button></div>
       <div class="login"><a href="/views/login">已有账号？马上登录</a></div>
       <p>{{message}}</p>
@@ -46,6 +45,7 @@ export default {
         .then(function (response) {
           self.user = response.data
           alert(self.user)
+          self.$router.push('/login')
         })
     }
   }

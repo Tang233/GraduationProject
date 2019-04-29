@@ -122,8 +122,9 @@ app.post('/register', function (req, res) {
       			// res.write("注册成功");
       			sqlString= sqlStr.INSERT_USER;
       			connection.query(sqlString,[new_id,new_pwd,new_email,new_icon,new_mobile],function(results){
-        			console.log('插入成功:'+results);
-              res.send("插入成功");
+        			console.log('注册成功:'+results);
+              res.send("注册成功");
+
     			  });
           }
         }
@@ -340,8 +341,8 @@ app.use('/getapplication', function (req, res) {
   console.log(ado_id)
   connection.query(sqlString, [ado_id], function (err, results) {
     var json = results
-    res.write(JSON.stringify(json))
-    res.end()
+    res.write(JSON.stringify(json));
+    res.end();
   })
 })
 
@@ -359,7 +360,7 @@ app.use('/getuserapplication', function (req, res) {
   var user_id = req.body.user_id
   connection.query(sqlString,[user_id], function (err,results) {
     var json = results
-    res.write(JSON.stringify(json))
+    res.write(JSON.stringify(json));
     res.end()
   })
 })

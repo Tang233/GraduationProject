@@ -2,7 +2,7 @@
 <!-- <myCanvas :dotsNum="dotsNum" :isColor="false"></myCanvas> -->
   <div class="AdminHome">
     <div class="left-nav">
-
+      <div class="home"><router-link :to="{ path:'/views/AdminHome'}">首页</router-link></div>
     </div>
     <div class="main">
       <h1>未审核领养信息</h1>
@@ -54,18 +54,10 @@
 
 <script>
 import axios from 'axios'
-import myCanvas from 'vue-atom-canvas'
 export default {
   name: 'AdminHome',
-  components: {
-    myCanvas
-  },
   data(){
     return{
-      dotsNum: '50',
-      isColor: 'true',
-      roundColor: '#999',
-      lineColor: '#ccc',
       admin_id: "",
       adoption:[{
         ado_id: "",
@@ -121,10 +113,24 @@ export default {
   bottom:0%;
   display:flex;
   flex-direction:row;
+  background-color: white;
 }
 .left-nav{
   width:200px;
-  background-color:#777777;
+  background-color:#3490DE;
+  box-shadow: 0px 5px 5px #777777;
+}
+.home{
+  position: absolute;
+  top: 10px;
+  left: 70px;
+  font-family: "微软雅黑";
+  font-size: 1.4rem;
+  text-align: center;
+}
+.home>a{
+  text-decoration: none;
+  color: white;
 }
 .adoption_list{
   width:1000px;
@@ -146,7 +152,7 @@ export default {
   flex-direction:row;
 }
 .table-header>.column{
-  background-color: blue;
+  background-color: #521262;
   color:#ffffff;
 }
 .column{

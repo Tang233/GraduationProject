@@ -24,6 +24,7 @@ export default {
       user_id: '',
       user_pwd: '',
       new_pwd: '',
+      repeat_pwd: '',
       bgd:'#5f6975'
     }
   },
