@@ -15,7 +15,7 @@
       <div class="ado-button" v-if="is_Logined&!is_Admin&ado_master!=user">
         <button type="button" name="button"  @click="showDialog()">申请领养</button>
       </div>
-      <div class="ado-button" v-if="is_Logined&is_Admin">
+      <div class="ado-button" v-if="is_Logined&is_Admin&ado_status=='待审核'">
           <button type="button" name="button" @click="Review()">审核通过</button>
           <button type="button" name="button" @click="Refuse()">拒绝通过</button>
       </div>
@@ -188,12 +188,14 @@ export default {
       axios.post('http://localhost:3000/agreeapplication',{app_id:id})
         .then(function (response) {
           alert(response.data)
+          location.replace(location.href)
         })
     },
     Disagree (id) {
       axios.post('http://localhost:3000/disagreeapplication',{app_id:id})
         .then(function (response) {
           alert(response.data)
+          location.replace(location.href)
         })
     }
   },
@@ -318,6 +320,7 @@ body{
   border: 5px solid white;
 }
 .row{
+  margin-bottom:10px;
   display:flex;
   flex-direction:row;
   border:2px solid #000000;

@@ -6,7 +6,7 @@
         <h2>我的申请信息</h2>
       </div>
       <div class="table" v-for="item in application_list">
-        <div class="row">
+        <div class="application-row">
           <div class="">
             {{item.app_adoption}}
           </div>
@@ -55,7 +55,7 @@ export default {
       const self = this
       this.user_id = this.getCookie("user_id")
       if(typeof(this.user_id) == "undefined" ){
-        alert("你尚未登陆")
+        alert("你尚未登陆，请登陆后再使用此功能")
         this.$router.push("/")
       }
       else{
@@ -90,7 +90,7 @@ export default {
   border-radius: 10px;
   background-color: #FFE8CF;
 }
-.row{
+.application-row{
   display:flex;
   flex-direction:row;
 }

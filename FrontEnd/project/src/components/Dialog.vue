@@ -39,6 +39,7 @@ export default {
         .then(function (response) {
           self.$emit('closeDialog', false)
           alert(response.data)
+          location.replace(location.href)
         })
     },
     closeDialog: function () {

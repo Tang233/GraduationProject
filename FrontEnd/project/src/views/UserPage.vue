@@ -4,7 +4,7 @@
 
   <div class="user-box"v-if="seen">
     <div class="icon-box">
-      <img src="../../images/icon.jpg" alt="">
+      <img :src="iconURL" alt="">
     </div>
 
     <div class="userinfo-box">
@@ -19,7 +19,7 @@
 
   <div class="user-box" v-if="!seen">
     <div class="icon-box">
-      <img src="../../images/icon.jpg" alt="">
+      <img :src="iconURL" alt="">
     </div>
 
     <div class="userinfo-box" v-if="!seen">
@@ -61,6 +61,7 @@ export default {
   name: 'UserPage',
   data(){
     return{
+      iconURL:"",
       user_id: 'baojian123',
       user_email: '1825949538@qq.com',
       user_mobile: '15817017250',
@@ -120,6 +121,7 @@ export default {
           if(typeof(response.data)=='number'){
             self.$router.push('/views/UserNotFound')
           }else{
+            self.iconURL = require("../assets/"+response.data.user_icon)
             self.user_id=response.data.user_id
             self.user_email=response.data.user_email
             self.user_mobile=response.data.user_mobile
