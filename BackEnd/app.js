@@ -245,6 +245,71 @@ app.use('/getuserinfo', function (req, res) {
   }
 })
 
+//修改用户信息
+app.use('/changeuserinfo', function (req, res) {
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" ); //
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.CHANGE_USERINFO;
+  var muser_mobile=req.body.muser_email;
+  var muser_email=req.body.muser_mobile;
+  var user_id = req.body.user_id;
+  console.log(muser_mobile);
+  console.log(muser_email);
+  console.log(user_id);
+  if(user_id ==''){
+    res.send("404")
+  }else{
+    connection.query(sqlString,[muser_mobile,muser_email,user_id],function (err, results) {
+      console.log(muser_mobile);
+      console.log(muser_email);
+      console.log(user_id);
+      console.log(typeof(results));
+      if(results.length == 0){
+        res.send("404")
+      }else{
+        console.log('修改成功');
+        res.send("修改成功");
+      }
+    })
+  }
+})
+
+//修改用户密码
+app.use('/changepwd', function (req, res) {
+  res.header('Access-Control-Allow-Origin', req.header('Origin'));
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'content-type,Authorization')
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
+  res.header("Access-Control-Max-Age", "1000" );
+  res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+
+  var sqlString = sqlStr.FIND_USER_BY_ID;
+  var user_id=req.body.user_id;
+  var user_pwd=req.body.user_pwd;
+  var new_pwd=req.body.new_pwd;
+  var repeat_pwd=req.body.repeat_pwd;
+
+  connection.query(sqlString, [user_id], function (err, results) {
+    console.log(user_id)
+    console.log(typedef(results))
+    if(user_pwd!=""&user_pwd==repeat_pwd){
+      sqlString =sql.CHANGE_PASSWORD;
+      connection.query(sqlString,[user_pwd,user_id], function (err, results) {
+        console.log(user_id)
+        console.log(user_pwd)
+        console.log(typedef(results))
+        console.log('修改密码成功:'+results);
+        res.send("修改密码成功");
+      })
+    }
+  })
+})
+
 //获取所有未审核的领养信息
 app.use('/getunreviewed', function (req, res) {
 

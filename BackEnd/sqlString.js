@@ -15,6 +15,8 @@ var sqlString = {
   REFUSE_ADOPTION: "update adoption set ado_status = '未通过' where ado_id = ?",
   AGREE_APPLICATION: "update application set app_status = '已通过' where app_id =?",
   DISAGREE_APPLICATION: "update application set app_status = '未通过' where app_id =?",
-  FINISH_ADOPTION: "update adoption set ado_status = '已完成' where ado_id = ?"
+  FINISH_ADOPTION: "update adoption set ado_status = '已完成' where ado_id = ?",
+  CHANGE_USERINFO: "update user set user_mobile = ?,user_email=? where user_id =?",
+  CHANGE_PASSWORD: "update user set user_pwd = ? where user_id =?"
 }
 module.exports = sqlString

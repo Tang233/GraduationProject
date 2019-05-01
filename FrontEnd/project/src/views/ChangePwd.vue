@@ -29,6 +29,14 @@ export default {
     }
   },
   methods: {
+    getUrl(){
+      var str =location.href.split('/')
+      for(var i in str){
+        if(str[i]==='ChangePwd'){
+          return str[Number(i)+1]
+        }
+      }
+    },
     getCookie: function (user_id) {//用户ID
       var str =document.cookie.split(';')
       var arr
@@ -45,13 +53,27 @@ export default {
     },
     ModifyPwd: function () {
       const self=this
-      var userid=this.getCookie(user_id)
-      axios.post('http://localhost:3000/changepwd',{})
-    }
+      var userid=this.getCookie("user_id")
+      this.user_id=this.getUrl()
+      axios.post('http://localhost:3000/changepwd', {user_id: this.user_id})
+      .then(function (response) {
+        if(typeof(response.data)=='number'){
+          self.$router.push('/views/UserNotFound')
+        }else{
+          self.user_id=response.data.user_id
+          self.user_pwd=response.data.user_pwd
+          console.log(self.user_id)
+          console.log(self.user_pwd)
+        }
+      })
+  },
+  mounted () {
+    this.ModifyPwd()
   },
   components: {
     Nav
   }
+}
 }
 </script>
 
@@ -70,7 +92,7 @@ export default {
   left: 480px;
   display: flex;
   flex-direction: column;
-  background-color: #FFA5A5;
+  background-color: #C8E7ED;
   border-radius: 10px;
   box-shadow: 0px 5px 10px #777777;
 
@@ -94,7 +116,7 @@ export default {
   left: 20px;
   width: 300px;
   height: 30px;
-  background-color: #FFA5A5;
+  background-color: #C8E7ED;
   font-family: "微软雅黑";
   font-size: 1.1rem;
 
@@ -115,7 +137,7 @@ input{
   font-family: "微软雅黑";
   font-size: 1.1rem;
   border: 0px;
-  background-color: #FFA5A5;
+  background-color: #C8E7ED;
   border-bottom: 1px solid black;
 }
 .repeatpwd{
@@ -135,7 +157,7 @@ input{
   height: 30px;
   font-family: "微软雅黑";
   font-size: 1.1rem;
-  background-color: #FFA5A5;
+  background-color: #C8E7ED;
   border: 1px solid black;
   border-radius: 10px;
 }

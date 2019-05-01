@@ -14,6 +14,9 @@
       <div class="modify">
         <button type="button" v-on:click="modifypage">修改信息</button>
       </div>
+      <div class="changepassword">
+        <button type="button"> <a :href="url">修改密码</a> </button>
+      </div>
     </div>
   </div>
 
@@ -23,7 +26,7 @@
     </div>
 
     <div class="userinfo-box" v-if="!seen">
-      <div class="user-name">用户名：1233567678{{user_id}}</div>
+      <div class="user-name">用户名：{{user_id}}</div>
       <div class="user-email">邮箱：<input type="text" v-model="muser_email"></div>
       <div class="user_mobile">联系方式：<input type="text" v-model="muser_mobile"></div>
       <div class="modify-btn">
@@ -62,13 +65,14 @@ export default {
   data(){
     return{
       iconURL:"",
-      user_id: 'baojian123',
-      user_email: '1825949538@qq.com',
-      user_mobile: '15817017250',
+      user_id: '',
+      user_email: '',
+      user_mobile: '',
       bgd:'#5f6975',
       muser_email: '',
       muser_mobile: '',
       seen: true,
+      url: 'http://localhost:8080/views/ChangePwd',
       adoption_list:[]
     }
   },
@@ -77,6 +81,7 @@ export default {
       var str =location.href.split('/')
       for(var i in str){
         if(str[i]==='UserPage'){
+
           return str[Number(i)+1]
         }
       }
@@ -95,13 +100,26 @@ export default {
         }
       }
     },
-    modifypage(){
-      // alert("这是自己的页面")
-    },
-    sendmodify(){
+    changepwd: function () {
 
     },
-    getUserInfo(){
+    modifypage: function () {
+      this.seen = false
+    },
+    sendmodify(){
+      const self = this
+      axios.post('http://localhost:3000/changeuserinfo',
+      { muser_mobile: this.muser_mobile,
+        muser_email: this.muser_email,
+        user_id: this.user_id
+      }).then(function (response) {
+        alert("修改成功")
+        this.getUserInfo()
+        this.seen = true
+        this.$router.push('views/UserPage'+ response.data.user_id);
+      })
+    },
+    getUserInfo: function () {
       const self=this
       this.user_id = this.getUrl()
       if(typeof(this.user_id) == 'undefined'){
@@ -110,7 +128,7 @@ export default {
       else{
         var name=this.getCookie("user_id")
         if(this.user_id==name){
-          this.modifypage()
+          this.seen = true
         }
         else{
           // seen=false
@@ -211,6 +229,15 @@ export default {
   width: 80px;
   height: 30px;
   top: 110px;
+  font-family: "微软雅黑";
+  font-size: 1rem;
+}
+.changepassword>button{
+  position: absolute;
+  width: 80px;
+  height: 30px;
+  top: 100px;
+  left: 100px;
   font-family: "微软雅黑";
   font-size: 1rem;
 }
