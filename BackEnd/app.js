@@ -288,24 +288,20 @@ app.use('/changepwd', function (req, res) {
   res.header("Access-Control-Max-Age", "1000" );
   res.header("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
-  var sqlString = sqlStr.FIND_USER_BY_ID;
-  var user_id=req.body.user_id;
-  var user_pwd=req.body.user_pwd;
-  var new_pwd=req.body.new_pwd;
-  var repeat_pwd=req.body.repeat_pwd;
-
+  var sqlString = sqlStr.FIND_USER_BY_ID
+  var user_id=req.body.user_id
+  var new_pwd=req.body.new_pwd
+  var user_pwd = req.body.user_pwd
   connection.query(sqlString, [user_id], function (err, results) {
-    console.log(user_id)
-    console.log(typedef(results))
-    if(user_pwd!=""&user_pwd==repeat_pwd){
-      sqlString =sql.CHANGE_PASSWORD;
-      connection.query(sqlString,[user_pwd,user_id], function (err, results) {
-        console.log(user_id)
-        console.log(user_pwd)
-        console.log(typedef(results))
-        console.log('修改密码成功:'+results);
+    console.log(results[0].user_pwd)
+    if(user_pwd==results[0].user_pwd){
+      sqlString =sqlStr.CHANGE_PASSWORD
+      connection.query(sqlString, [new_pwd,user_id], function (err, results) {
+        
         res.send("修改密码成功");
       })
+    }else{
+      res.send("原密码错误")
     }
   })
 })

@@ -83,10 +83,7 @@ export default new Router({
     {
       path: '/views/ChangePwd',
       name: 'ChangePwd',
-      component: ChangePwd,
-      children:[{
-        path:"*"
-      }]
+      component: ChangePwd
     },
     {
       path: '/views/UserPage',

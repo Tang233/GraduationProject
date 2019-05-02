@@ -16,7 +16,7 @@
 
 <script>
 import axios from 'axios'
-import Nav from '@/components/Nav'
+import Nav from '@/components/Nav.vue'
 export default {
   name: 'ChangePwd',
   data(){
@@ -53,27 +53,29 @@ export default {
     },
     ModifyPwd: function () {
       const self=this
-      var userid=this.getCookie("user_id")
-      this.user_id=this.getUrl()
-      axios.post('http://localhost:3000/changepwd', {user_id: this.user_id})
+      if(this.new_pwd != this.repeat_pwd){
+        alert("两次密码不一致，请重新输入")
+        return
+      }
+      axios.post('http://localhost:3000/changepwd', {user_id: this.user_id,new_pwd:this.new_pwd,user_pwd:this.user_pwd})
       .then(function (response) {
-        if(typeof(response.data)=='number'){
-          self.$router.push('/views/UserNotFound')
-        }else{
-          self.user_id=response.data.user_id
-          self.user_pwd=response.data.user_pwd
-          console.log(self.user_id)
-          console.log(self.user_pwd)
+        if(response.data == '修改密码成功'){
+          alert(response.data)
+          self.$router.push('/views/UserPage/'+self.user_id)
         }
       })
+    }
   },
   mounted () {
-    this.ModifyPwd()
+    this.user_id=this.getCookie('user_id')
+    if(typeof(this.user_id) == 'undefined') {
+      alert("你尚未登录，请登录后在使用此功能")
+      this.$router.push('/')
+    }
   },
   components: {
     Nav
   }
-}
 }
 </script>
 
