@@ -83,6 +83,7 @@ CREATE TABLE application(
   app_adoption varchar(32) not null,
   app_status varchar(16) not null default '待通过',
   app_content text not null,
+  app_date date not null,
   CONSTRAINT PRIMARY KEY(app_id),
   CONSTRAINT FOREIGN KEY(app_user) REFERENCES user(user_id),
   CONSTRAINT FOREIGN KEY(app_adoption) REFERENCES adoption(ado_id),

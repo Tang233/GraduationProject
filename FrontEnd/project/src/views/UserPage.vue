@@ -100,25 +100,6 @@ export default {
         }
       }
     },
-    changepwd: function () {
-
-    },
-    modifypage: function () {
-      this.seen = false
-    },
-    sendmodify(){
-      const self = this
-      axios.post('http://localhost:3000/changeuserinfo',
-      { muser_mobile: this.muser_mobile,
-        muser_email: this.muser_email,
-        user_id: this.user_id
-      }).then(function (response) {
-        alert("修改成功")
-        this.getUserInfo()
-        this.seen = true
-        this.$router.push('views/UserPage'+ response.data.user_id);
-      })
-    },
     getUserInfo: function () {
       const self=this
       this.user_id = this.getUrl()
@@ -149,6 +130,19 @@ export default {
           }
         })
       }
+    },
+    modifypage: function () {
+      this.seen = false
+    },
+    sendmodify(){
+      const self = this
+      axios.post('http://localhost:3000/changeuserinfo',
+      { muser_mobile: this.muser_mobile,
+        muser_email: this.muser_email,
+        user_id: this.user_id
+      }).then(function (response) {
+        alert("修改成功")
+      })
     },
     getAdoption() {
       const self = this
