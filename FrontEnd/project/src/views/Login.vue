@@ -6,7 +6,7 @@
         <div ><input class="username" type="text" placeholder="请输入用户名" v-model="username"></div>
         <div ><input class="userpwd" type="password" placeholder="请输入密码" v-model="password"></div>
         <div ><button type="button" v-on:click="Login">登录</button></div>
-        <div class="regist"><a href="/views/regist">没有账号？马上注册</a></div>
+        <div class="regist"><a href="/register">没有账号？马上注册</a></div>
         <p>{{cookie}}</p>
       </div>
     </div>

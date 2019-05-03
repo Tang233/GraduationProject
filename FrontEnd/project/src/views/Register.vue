@@ -7,7 +7,7 @@
       <div ><input class="input" type="text" placeholder="请再次输入密码" v-model="repeatPwd"></div>
       <div ><input class="input" type="text" placeholder="请输入邮箱" v-model="newEmail"></div>
       <div ><button type="button" v-on:click="Register">注册</button></div>
-      <div class="login"><a href="/views/login">已有账号？马上登录</a></div>
+      <div class="login"><a href="/login">已有账号？马上登录</a></div>
       <p>{{message}}</p>
     </div>
   </div>

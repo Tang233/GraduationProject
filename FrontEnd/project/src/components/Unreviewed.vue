@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="box">
+    <!-- <myCanvas :dotsNum="dotsNum" :isColor="false"></myCanvas> -->
     <div class="unreviewed-box">
       <div class="ado-title">{{ado_title}}</div>
       <div class="ado-date">日期：{{ado_date}}</div>
@@ -19,14 +20,21 @@ import axios from 'axios'
 import myCanvas from 'vue-atom-canvas'
 export default {
   name: 'Unreviewed',
+  components: {
+    myCanvas
+  },
   data(){
     return{
-      ado_title: '',
-      ado_date: '',
-      ado_master: '',
-      ado_id: '',
-      ado_status: '',
-      ado_content: '',
+      dotsNum: '50',
+      isColor: 'true',
+      roundColor: '#999',
+      lineColor: '#ccc',
+      ado_title: '小黄广州宠物领养',
+      ado_date: '2019年4月12日',
+      ado_master: 'ian',
+      ado_id: '123456',
+      ado_status: '未审核',
+      ado_content: '类型：小狗   性别：公   年龄：3个月   地址：广州  联系方式：12345678',
       ado_img: '',
       adoption: {}
     }

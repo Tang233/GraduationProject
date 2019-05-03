@@ -297,7 +297,7 @@ app.use('/changepwd', function (req, res) {
     if(user_pwd==results[0].user_pwd){
       sqlString =sqlStr.CHANGE_PASSWORD
       connection.query(sqlString, [new_pwd,user_id], function (err, results) {
-        
+
         res.send("修改密码成功");
       })
     }else{
@@ -372,7 +372,7 @@ app.use('/applyadoption', function (req, res) {
     var sqlString = sqlStr.GET_ROW+"application"
     connection.query(sqlString, [], function (err, results) {
       var sqlString = sqlStr.APPLY_ADOPTION
-      var app_id = 100000+results[0].count
+      var app_id = 100000+results[0].count +1
 
       connection.query(sqlString, [app_id, app_user, app_adoption, app_content, app_status,app_date], function (err, results) {
         // for (var i in results) {
